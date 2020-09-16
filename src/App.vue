@@ -1,0 +1,240 @@
+<template>
+  <v-app id="app">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      :clipped="$vuetify.breakpoint.mdAndUp"
+      v-if="logueado" 
+    >
+      <v-list dense>
+         <template v-if="esAdministrador">
+
+        </template>
+        <!-- nuevo menu -->
+          <v-list-item link :to="{name:'Bienvenida'}">
+        <v-list-item-icon>
+          <v-icon>mdi-home</v-icon>
+        </v-list-item-icon>
+
+        <v-list-item-title><h3>Inicio</h3></v-list-item-title>
+      </v-list-item>
+
+      <v-list-group
+        prepend-icon="account_circle" 
+      >
+        <template v-slot:activator>
+          <v-list-item-title><h3>Referenciales</h3></v-list-item-title>
+        </template>
+
+        <v-list-group
+          no-action
+          sub-group
+          value="true"
+        >
+          <template v-slot:activator>
+            <v-list-item-content >
+              <v-list-item-title ><h3>Personas</h3></v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item link>
+            <v-list-item-title><h3>Cliente</h3></v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-title><h3>Usuarios</h3></v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-group>
+        <!-- otro menu -->
+          <v-list-group
+          no-action
+          sub-group
+          value="true"
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title><h3>Productos</h3></v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item link>
+            <v-list-item-title>Cliente</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon>add</v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-title>Usuario</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-group>
+          <!-- fin -->
+          <!--  menu localidades -->
+          <v-list-group
+          no-action
+          sub-group
+          value="true"
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title><h3>Localidades</h3></v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item link>
+            <v-list-item-title>Cliente</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-title>Usuario</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-group>
+          <!-- fin -->
+           <!--  menu Taller -->
+          <v-list-group
+          no-action
+          sub-group
+          value="true"
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title><h3>Taller</h3></v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item link>
+            <v-list-item-title>Cliente</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-title>Usuario</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-group>
+          <!-- fin -->
+      </v-list-group>
+            <!--fin menu-->
+      <!-- otro menu -->
+       <v-list-group
+        prepend-icon="account_circle" 
+        no-action
+      >
+        <template v-slot:activator>
+          <v-list-item-content>
+            <v-list-item-title><h3>Stock</h3></v-list-item-title>
+          </v-list-item-content>
+        </template>
+        <v-list-item link :to="{name: 'Login'}">
+          <v-list-item-content>
+            <v-list-item-title>es</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list-group>
+      <!-- fin -->
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar
+      app
+      clipped-left
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Sistema Comercial</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn class="m-8" @click="salir()" icon v-if="logueado">
+        <v-icon>logout</v-icon>
+      </v-btn>
+      <v-btn :to="{name: 'login'}" icon v-else>
+        <v-icon>apps</v-icon>
+      </v-btn>
+    </v-app-bar>
+    <!-- aqui va el contenido -->
+    
+    <!-- fin -->
+    <v-content >
+      <v-container fluid >
+        <v-slide-y-transition mode="out-in">
+          <router-view />
+        </v-slide-y-transition>
+      </v-container>
+    </v-content>
+    <!-- aqui termina el contenido -->
+    <v-footer app  >
+      <v-col
+      class="text-center"
+      cols="12"
+    >
+      {{ new Date().getFullYear() }} — <strong>Desarrollado por Smart Emprendimiento</strong>
+    </v-col>
+    </v-footer>
+  </v-app>
+</template>
+
+<script>
+  export default {
+    name: "App",
+    data() {
+      
+      return{
+        drawer: true,
+        background: false,
+      };
+     
+    }, 
+  computed: {
+    
+    bg () {
+        return 'https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg'
+      },
+    logueado() {
+   return this.$store.state.usuario;
+    },
+    esAdministrador() {
+      return (
+        this.$store.state.usuario &&
+        this.$store.state.usuario.NivelUsuario == "ADMINISTRADOR"
+      );
+       
+    },
+    esAlmacenero() {
+      return (
+        this.$store.state.usuario &&
+        this.$store.state.usuario.rol == "Almacenero"
+      );
+    },
+    esVendedor() {
+      return (
+        this.$store.state.usuario && this.$store.state.usuario.NivelUsuario == "Vendedor"
+      );
+    }
+  },    
+    created () {
+      this.$vuetify.theme.dark = true
+       this.$store.dispatch("autoLogin");
+    },
+     methods: {
+    salir() {
+      this.$store.dispatch("salir");
+      console.log("limpiar")
+      localStorage.clear();
+    }
+  }
+  }
+</script>
+<style>
+h3{
+  font-size: 17px;
+}
+</style>
