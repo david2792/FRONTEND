@@ -4,6 +4,7 @@ import store from '../store/index';
 import Login from '../components/acceso/Login.vue';
 import bienvenida from '../components/pantallaPrincipal/bienvenida.vue'
 import Home from '../views/Home'
+import VistaCliente from '../views/cliente/VistaCliente.vue'
 Vue.use(Router)
 
 var router = new Router({
@@ -34,6 +35,14 @@ var router = new Router({
         administrador:true
         }
     },
+    {
+      path: '/clientes',
+      name: 'cliente',
+      component: VistaCliente,
+      meta: {
+        libre: true
+      }
+      },
   ]
 })
 router.beforeEach((to, from, next) => {

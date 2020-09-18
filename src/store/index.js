@@ -2,10 +2,17 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import decode from 'jwt-decode'
 import router from '../router/index'
+import * as vCliente from '../store/referenciales-personas/clientes.js'
+import * as ciudad from '../store/referenciales-localidades/ciudad.js'
+
+import *as dialogo from '@/store/dialogo/dialogo.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules:{
+    vCliente,
+    ciudad,
+    dialogo
   },
   state: {
     token: null,

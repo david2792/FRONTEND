@@ -36,7 +36,7 @@
               <v-list-item-title ><h3>Personas</h3></v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item link>
+          <v-list-item link :to="{name:'cliente'}">
             <v-list-item-title><h3>Cliente</h3></v-list-item-title>
             <v-list-item-icon>
               <v-icon></v-icon>

@@ -42,7 +42,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn block  color="indigo accent-4" @click="ingresar()" :loading="loading">Acceso</v-btn>
+                <v-btn block  color="indigo accent-4" @click="ingresar()" :loading="loading">Acces</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
