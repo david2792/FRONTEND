@@ -18,6 +18,7 @@
                 </div>
                 <v-form>
                   <v-text-field
+                    outlined
                     append-icon="person"
                     name="usuario"
                     label="USUARIO"
@@ -26,6 +27,7 @@
                     :error="error"
                     :rules="[rules.required]"/>
                   <v-text-field
+                    outlined
                     :type="hidePassword ? 'password' : 'text'"
                     :append-icon="hidePassword ? 'visibility_off' : 'visibility'"
                     name="password"
@@ -42,7 +44,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn block  color="indigo accent-4" @click="ingresar()" :loading="loading">Acces</v-btn>
+                <v-btn block  color="indigo accent-4" @click="ingresar()" :loading="loading">Acceso</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>

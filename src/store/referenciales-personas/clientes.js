@@ -11,12 +11,13 @@ export const state = {
         Ruc: "",
         Direccion: "",
         Telefono: "",
-       
         CodigoCiudad:"",
         Email: "",
-        configuracion: [],
+        
     },
-    edit:false,
+    configuracion: [],
+    editar_item:false,
+    
 };
 
 export const mutations = {
@@ -40,18 +41,35 @@ export const actions = {
                 commit("SET_CLIENTE", cliente);
             });
     },
-    insertCliente({ commit }, cliente){
-        console.log("recibiendo valores para registrar cliente: ", cliente.configuracion);
-        axios
-        .post('clientes', {clientes: cliente}, cliente.configuracion)
-        .then(function (response) {
-            console.log('Hola!!!')
-            
-        })
-        .catch(function(error) {
-            console.log(error);
-          });
+    
+    guardarCliente({ commit }, configuracion) {
+        console.log(configuracion);
+        if (state.editar_item==false) {
+            console.log("Guardar", state.Cliente)
+            let setCliente = state.Cliente;
+            axios
+                .post('clientes', { clientes: setCliente }, configuracion)
+                .then(result =>{
+                    commit("SET_CLIENTE", result.data);
+                }).catch(error=>{
+                    console.log("Error: "+error);
+                });
+            //state.editar_item = !state.editar_item;
+        } else {
+            console.log("Editar", state.Cliente);
+            let setCliente = state.Cliente;
+            axios
+                .put('clientes', { clientes: setCliente }, configuracion)
+                .then(result =>{
+                    commit("SET_CLIENTE", result.data);
+                }).catch(error=>{
+                    console.log("Error: "+error);
+                });
+                //console.log("Editar", state.Proveedor);
+                state.editar_item = !state.editar_item;
+        }
     },
+
     getCliente({commit}, item){
         console.log("Item recibido", item);
         commit("GET_CLIENTE", item);

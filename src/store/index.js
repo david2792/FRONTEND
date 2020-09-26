@@ -4,14 +4,27 @@ import decode from 'jwt-decode'
 import router from '../router/index'
 import * as vCliente from '../store/referenciales-personas/clientes.js'
 import * as ciudad from '../store/referenciales-localidades/ciudad.js'
-
-import *as dialogo from '@/store/dialogo/dialogo.js'
+// PRODUCTOS
+import * as vDeposito from '../store/referenciales-producto/depositos.js'
+import * as vProducto from '../store/producto/productos.js'
+import * as vMarca from '../store/referenciales-producto/marcas.js'
+import * as dialogo from '@/store/dialogo/dialogo.js'
+import * as vImpuesto from '../store/referenciales-producto/impuestos.js'
+import * as vCategoria from './referenciales-producto/categorias.js'
+import * as vServicio from './servicio/servicios.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules:{
     vCliente,
     ciudad,
+    // productos
+    vImpuesto,
+    vCategoria,
+    vMarca,
+    vDeposito,
+    vProducto,
+    vServicio,
     dialogo
   },
   state: {

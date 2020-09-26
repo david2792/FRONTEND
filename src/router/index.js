@@ -5,6 +5,10 @@ import Login from '../components/acceso/Login.vue';
 import bienvenida from '../components/pantallaPrincipal/bienvenida.vue'
 import Home from '../views/Home'
 import VistaCliente from '../views/cliente/VistaCliente.vue'
+
+// productos
+import VistaProducto from '../views/producto/VistaProducto.vue';
+import VistaServicio from '../views/servicio/VistaServicio.vue';
 Vue.use(Router)
 
 var router = new Router({
@@ -43,6 +47,23 @@ var router = new Router({
         libre: true
       }
       },
+      // rutas de productos
+      {
+        path: '/productos',
+        name: 'producto',
+        component: VistaProducto,
+        meta: {
+          libre: true
+        }
+        },
+        {
+          path: '/servicios',
+          name: 'servicio',
+          component: VistaServicio,
+          meta: {
+            libre: true
+          }
+          },
   ]
 })
 router.beforeEach((to, from, next) => {

@@ -1,0 +1,49 @@
+DELIMITER $$
+
+ALTER ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vproductos` AS (
+SELECT
+  `productos`.`CodigoProducto`   AS `CodigoProducto`,
+  `productos`.`CodigoBarra`      AS `CodigoBarra`,
+  `productos`.`Descripcion`      AS `Descripcion`,
+  `productos`.`CantidadPaquete`  AS `CantidadPaquete`,
+  `productos`.`Peso`             AS `Peso`,
+  `productos`.`Perecedero`       AS `Perecedero`,
+  `productos`.`Estado`           AS `Estado`,
+  `representante`.`Descripcion`  AS `Representante`,
+  `unidadmedida`.`Descripcion`   AS `Media`,
+  `marcas`.`Descripcion`         AS `Marca`,
+   `marcas`.`CodigoMarca`         AS `CodigoMarca`,
+  `categorias`.`CodigoCategoria`   AS `CodigoCategoria`,
+  `categorias`.`Descripcion`     AS `Categoria`,
+  `tipoimpuesto`.`Descripcion`   AS `Impuesto`,
+  `tipoimpuesto`.`CodigImpuesto` AS `CodigImpuesto`,
+  `stock`.`StockActual`          AS `StockActual`,
+  `stock`.`StockMinimo`          AS `StockMinimo`,
+  `stock`.`StockMaximo`          AS `StockMaximo`,
+  `stock`.`PrecioCompra`         AS `PrecioCompra`,
+  `stock`.`UtilidadMinima`       AS `UtilidadMinima`,
+  `stock`.`UtilidadMaxima`       AS `UtilidadMaxima`,
+  `stock`.`PrecioVentaMinorista` AS `PrecioVentaMinorista`,
+  `stock`.`PrecioVentaMayorista` AS `PrecioVentaMayorista`,
+  `stock`.`Estante`              AS `Estante`,
+  `stock`.`Fila`                 AS `Fila`,
+  `stock`.`Columna`              AS `Columna`,
+  `depositos`.`codigoDeposito`   AS `CodigoDeposito`,
+  `depositos`.`Nombre`           AS `Deposito`
+FROM (((((((`stock`
+         JOIN `productos`
+           ON ((`stock`.`CodigoProducto` = `productos`.`CodigoProducto`)))
+        JOIN `depositos`
+          ON ((`stock`.`codigoDeposito` = `depositos`.`codigoDeposito`)))
+       JOIN `marcas`
+         ON ((`productos`.`CodigoMarca` = `marcas`.`CodigoMarca`)))
+      JOIN `categorias`
+        ON ((`productos`.`CodigoCategoria` = `categorias`.`CodigoCategoria`)))
+     JOIN `unidadmedida`
+       ON ((`productos`.`CodigoUnidad` = `unidadmedida`.`CodigoUnidad`)))
+    JOIN `tipoimpuesto`
+      ON ((`productos`.`CodigImpuesto` = `tipoimpuesto`.`CodigImpuesto`)))
+   JOIN `representante`
+     ON ((`productos`.`CodigoRepresentante` = `representante`.`CodigoRepresentante`))))$$
+
+DELIMITER ;

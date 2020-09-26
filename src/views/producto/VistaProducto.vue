@@ -2,7 +2,7 @@
   <v-layout align-start>
     <v-flex>
       <v-toolbar float>
-        <v-toolbar-title>Clientes</v-toolbar-title>
+        <v-toolbar-title>Repuestos</v-toolbar-title>
         <v-divider class="mx-2" insert vertical></v-divider>
         <v-spacer></v-spacer>
           <template>
@@ -11,25 +11,25 @@
               <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
             </v-btn>
           </template>
-       <v-dialog v-model="modal" max-width="600px">
-          <FormularioCliente/>
+       <v-dialog v-model="modal" max-width="1000px">
+          <FormularioProducto/>
         </v-dialog>
       </v-toolbar>
-      <ListaCliente/>
+      <ListaProducto/>
     </v-flex>
   </v-layout>
 </template>
 <script>
-import FormularioCliente from "./FormularioCliente";
-import ListaCliente from "./ListaCliente";
+import FormularioProducto from "./FormularioProducto";
+import ListaProducto from "./ListaProducto";
 export default {
   data() {
     return {
     };
   },
   components: {
-    FormularioCliente,
-    ListaCliente
+    FormularioProducto,
+    ListaProducto
   },
   computed: {
     modal: {
@@ -37,12 +37,12 @@ export default {
         return this.$store.getters.getModal;
       },
       set(value) {
-        console.log("hola mundo");
         this.$store.dispatch("switchDialog", value);
       },
     },
   },
   methods:{
+    
       close(){
       this.dialog=false;
       console.log("paso")

@@ -60,8 +60,8 @@
               <v-list-item-title><h3>Productos</h3></v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item link>
-            <v-list-item-title>Cliente</v-list-item-title>
+          <v-list-item link :to="{name:'producto'}">
+            <v-list-item-title>Repuestos</v-list-item-title>
             <v-list-item-icon>
               <v-icon>add</v-icon>
             </v-list-item-icon>
@@ -136,11 +136,17 @@
             <v-list-item-title><h3>Stock</h3></v-list-item-title>
           </v-list-item-content>
         </template>
-        <v-list-item link :to="{name: 'Login'}">
+        <v-list-item link :to="{name:'producto'}">
           <v-list-item-content>
-            <v-list-item-title>es</v-list-item-title>
+            <v-list-item-title><h3>Repuestos</h3></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+          <v-list-item  :to="{name:'servicio'}">
+          <v-list-item-content>
+            <v-list-item-title><h3>Servicios</h3></v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        
       </v-list-group>
       <!-- fin -->
       </v-list>
