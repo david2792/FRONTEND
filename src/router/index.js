@@ -3,12 +3,14 @@ import Router from 'vue-router';
 import store from '../store/index';
 import Login from '../components/acceso/Login.vue';
 import bienvenida from '../components/pantallaPrincipal/bienvenida.vue'
-import Home from '../views/Home'
 import VistaCliente from '../views/cliente/VistaCliente.vue'
 
 // productos
 import VistaProducto from '../views/producto/VistaProducto.vue';
 import VistaServicio from '../views/servicio/VistaServicio.vue';
+// taller
+import VistaVehiculo from '../views/vehiculo/VistaVehiculo';
+import VistaRecepcion from '../views/recepcion_vehiculo/VistaRecepcion';
 Vue.use(Router)
 
 var router = new Router({
@@ -32,19 +34,11 @@ var router = new Router({
         }
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home,
-      meta: {
-        administrador:true
-        }
-    },
-    {
       path: '/clientes',
       name: 'cliente',
       component: VistaCliente,
       meta: {
-        libre: true
+        administrador: true
       }
       },
       // rutas de productos
@@ -53,7 +47,7 @@ var router = new Router({
         name: 'producto',
         component: VistaProducto,
         meta: {
-          libre: true
+          administrador: true
         }
         },
         {
@@ -61,9 +55,26 @@ var router = new Router({
           name: 'servicio',
           component: VistaServicio,
           meta: {
+            administrador: true
+          }
+          },
+// taller
+        {
+          path: '/vehiculos',
+          name: 'vehiculo',
+          component: VistaVehiculo,
+          meta: {
             libre: true
           }
           },
+          {
+            path: '/recepciones',
+            name: 'recepcion',
+            component: VistaRecepcion,
+            meta: {
+              libre: true
+            }
+            },
   ]
 })
 router.beforeEach((to, from, next) => {

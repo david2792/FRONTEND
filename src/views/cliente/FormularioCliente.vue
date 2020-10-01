@@ -58,7 +58,7 @@
             </v-flex>
             <v-flex xs12 sm6 md6>
               <v-autocomplete
-                 outlined
+                outlined
                 :rules="CiudadRules"
                 required
                 :items="ciudad.Ciudades"

@@ -141,7 +141,7 @@
             <v-list-item-title><h3>Repuestos</h3></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-          <v-list-item  :to="{name:'servicio'}">
+          <v-list-item link :to="{name:'servicio'}">
           <v-list-item-content>
             <v-list-item-title><h3>Servicios</h3></v-list-item-title>
           </v-list-item-content>

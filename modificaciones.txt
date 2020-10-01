@@ -47,3 +47,48 @@ FROM (((((((`stock`
      ON ((`productos`.`CodigoRepresentante` = `representante`.`CodigoRepresentante`))))$$
 
 DELIMITER ;
+
+
+DELIMITER $$
+
+ALTER ALGORITHM=UNDEFINED DEFINER=`manager`@`%` SQL SECURITY DEFINER VIEW `vclientevehiculos` AS (
+SELECT
+  `clientes`.`Cedula`          AS `Cedula`,
+  `clientes`.`CodigoCliente`   AS `CodigoCliente`,
+  `clientes`.`Ruc`             AS `Ruc`,
+  `clientes`.`RazonSocial`     AS `RazonSocial`,
+  `tipostransmision`.`nombre`  AS `transmicion`,
+  `tipostransmision`.`codigotransmision`  AS `codigotransmision`,
+  `tracciones`.`nombre`        AS `traccion`,
+  `modelosvehiculos`.`nombre`  AS `modelo`,
+  `modelosvehiculos`.`codigomodelo`  AS `codigomodelo`,
+  `marcasvehiculos`.`nombre`   AS `marca`,
+  `marcasvehiculos`.`codigomarca`   AS `codigomarca`,
+  `tiposcombustibles`.`nombre` AS `combustible`,
+  `colores`.`nombre`           AS `color`,
+  `colores`.`codigocolor`           AS `codigocolor`,
+  `vehiculos`.`numerochapa`    AS `chapa`,
+  `vehiculos`.`codigo`         AS `codigo`,
+  `vehiculos`.`numerochasis`   AS `chasis`,
+  `vehiculos`.`observacion`    AS `observacion`
+FROM (((((((((`detallesvehiculos`
+           JOIN `clientes`
+             ON ((`detallesvehiculos`.`codigocliente` = `clientes`.`CodigoCliente`)))
+          JOIN `vehiculos`
+            ON ((`detallesvehiculos`.`codigovehiculo` = `vehiculos`.`codigo`)))
+         JOIN `tipostransmision`
+           ON ((`vehiculos`.`codigotransmision` = `tipostransmision`.`codigotransmision`)))
+        JOIN `tracciones`
+          ON ((`vehiculos`.`codigotraccion` = `tracciones`.`codigo`)))
+       JOIN `modelosvehiculos`
+         ON ((`vehiculos`.`codigomodelo` = `modelosvehiculos`.`codigomodelo`)))
+      JOIN `marcasvehiculos`
+        ON ((`vehiculos`.`codigomarca` = `marcasvehiculos`.`codigomarca`)))
+     JOIN `tiposcombustibles`
+       ON ((`vehiculos`.`codigotipocombustible` = `tiposcombustibles`.`codigo`)))
+    JOIN `colores`
+      ON ((`vehiculos`.`codigocolor` = `colores`.`codigocolor`)))
+   JOIN `anios`
+     ON ((`vehiculos`.`codigoanio` = `anios`.`codigo`))))$$
+
+DELIMITER ;

@@ -22,7 +22,7 @@
           >
                <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
             <center><v-icon size="80">group</v-icon></center>
-             <v-btn color="#BF36" tile  block >
+             <v-btn color="#BF36" tile  block :to="{name:'cliente'}" >
             <v-icon size="30" left></v-icon>Cliente
             </v-btn>
        
@@ -52,7 +52,7 @@
           >
                <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
             <center><v-icon size="80">local_shipping</v-icon></center>
-             <v-btn color="#BF36" tile  block >
+             <v-btn color="#BF36" tile  block :to="{name: 'vehiculo'}" >
             <v-icon size="30" left></v-icon>Recep.Vehiculo
             </v-btn>
        
@@ -67,7 +67,7 @@
           >
                <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
             <center><v-icon size="80">plumbing</v-icon></center>
-             <v-btn color="#BF36" tile  block >
+             <v-btn color="#BF36" tile  block   :to="{name: 'producto'}" >
             <v-icon size="30" left></v-icon>Repuestos
             </v-btn>
        
@@ -82,7 +82,7 @@
           >
                <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
             <center><v-icon size="80">transfer_within_a_station</v-icon></center>
-             <v-btn color="#BF36" tile  block >
+             <v-btn color="#BF36" tile  block   :to="{name: 'servicio'}" >
             <v-icon size="30" left></v-icon>Servicios
             </v-btn>
        
@@ -97,7 +97,7 @@
           >
                <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
             <center><v-icon size="80">local_taxi</v-icon></center>
-             <v-btn color="#BF36" tile  block >
+             <v-btn color="#BF36" tile  block  :to="{name: 'vehiculo'}">
             <v-icon size="30" left></v-icon>Vehiculos
             </v-btn>
        

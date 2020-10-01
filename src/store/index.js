@@ -12,6 +12,15 @@ import * as dialogo from '@/store/dialogo/dialogo.js'
 import * as vImpuesto from '../store/referenciales-producto/impuestos.js'
 import * as vCategoria from './referenciales-producto/categorias.js'
 import * as vServicio from './servicio/servicios.js'
+
+// taller
+import * as vVehiculo from './vehiculo/vehiculos.js'
+import * as vTransmicion from './referenciales-taller/transmicion.js'
+import * as vModelo from './referenciales-taller/modelo.js'
+import * as vMarcaVehiculo from './referenciales-taller/marca.js'
+import * as vColor from './referenciales-taller/color.js'
+import * as vNivel from './referenciales-taller/nivelCombustibles.js'
+import * as vRecepcion from './recepcion-vehiculo/recepciones.js'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -25,6 +34,14 @@ export default new Vuex.Store({
     vDeposito,
     vProducto,
     vServicio,
+    // taller
+    vVehiculo,
+    vTransmicion,
+    vMarcaVehiculo,
+    vColor,
+    vModelo,
+    vNivel,
+    vRecepcion,
     dialogo
   },
   state: {
