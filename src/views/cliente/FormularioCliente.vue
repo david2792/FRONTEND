@@ -18,11 +18,16 @@
               ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md6>
-              <v-text-field outlined v-model="vCliente.Cliente.Ruc" :rules="RucRules"  label="RUC"></v-text-field>
+              <v-text-field
+                outlined
+                v-model="vCliente.Cliente.Ruc"
+                :rules="RucRules"
+                label="RUC"
+              ></v-text-field>
             </v-flex>
             <v-flex xs12 sm6 md6>
               <v-text-field
-               outlined
+                outlined
                 v-model="vCliente.Cliente.Cedula"
                 :rules="CedulaRules"
                 required
@@ -31,7 +36,7 @@
             </v-flex>
             <v-flex xs12 sm6 md6>
               <v-text-field
-                 outlined
+                outlined
                 v-model="vCliente.Cliente.Direccion"
                 :rules="DireccionRules"
                 required
@@ -62,7 +67,7 @@
                 :rules="CiudadRules"
                 required
                 :items="ciudad.Ciudades"
-                :item-text="item=>`${item.CodigoCiudad} ${item.Ciudad}`"
+                :item-text="(item) => `${item.CodigoCiudad} ${item.Ciudad}`"
                 item-value="CodigoCiudad"
                 label="Ciudad"
                 v-model="vCliente.Cliente.CodigoCiudad"
@@ -72,30 +77,34 @@
         </v-container>
       </v-card-text>
       <v-card-actions>
-      <v-spacer></v-spacer>
         <v-spacer></v-spacer>
-        <v-btn class="mb-2" dark color="red accent-3" @click="modal=!modal, limpiar()">
+        <v-spacer></v-spacer>
+        <v-btn
+          class="mb-2"
+          dark
+          color="red accent-3"
+          @click="(modal = !modal), limpiar()"
+        >
           Cancelar
           <v-icon dark right>mdi-cancel</v-icon>
         </v-btn>
-        <v-btn class="mb-2"  color="blue darken-1" @click="guardar()">
+        <v-btn class="mb-2" color="blue darken-1" @click="guardar()">
           Guardar
           <v-icon>mdi-cloud-upload</v-icon>
         </v-btn>
       </v-card-actions>
-       <v-flex xs12 sm12 md12 xl12 v-if="notificacion==1">
-           <v-alert 
-            
-            dismissible
-            close-icon="mdi-delete"
-            color="light-blue accent-4"
-            elevation="2"
-            type="info"
-            outlined
-           >
-      {{mensaje}}
-    </v-alert>
-         </v-flex>
+      <v-flex xs12 sm12 md12 xl12 v-if="notificacion == 1">
+        <v-alert
+          dismissible
+          close-icon="mdi-delete"
+          color="light-blue accent-4"
+          elevation="2"
+          type="info"
+          outlined
+        >
+          {{ mensaje }}
+        </v-alert>
+      </v-flex>
     </v-card>
   </v-form>
 </template>
@@ -105,8 +114,8 @@ export default {
   data() {
     return {
       valid: true,
-      mensaje:'',
-      notificacion:0,
+      mensaje: "",
+      notificacion: 0,
       token_configuration: [],
       RazonRules: [(v) => !!v || "Razon Social requerido"],
       RucRules: [(v) => !!v || "Razon Social requerido"],
@@ -115,7 +124,6 @@ export default {
       TelefonoRules: [(v) => !!v || "Telefono requerido"],
       EmailRules: [(v) => !!v || "Email requerido"],
       CiudadRules: [(v) => !!v || "Ciudad requerido"],
-
     };
   },
   // name: 'FormularioProveedor',
@@ -141,13 +149,13 @@ export default {
   methods: {
     createFreshProveedor() {
       return {
-      RazonSocial: "",
+        RazonSocial: "",
         CodigoCliente: "",
         Cedula: "",
         Ruc: "",
         Direccion: "",
         Telefono: "",
-        CodigoCiudad:"",
+        CodigoCiudad: "",
         Email: "",
       };
     },
@@ -155,45 +163,42 @@ export default {
       const cod = texto.split(" ")[0];
       return cod;
     },
-    reset () {
-        this.$refs.form.reset()
-      },
+    reset() {
+      this.$refs.form.reset();
+    },
     limpiar() {
-     this.vCliente.Cliente = this.createFreshProveedor();
-     this.reset ();
-      this.notificacion=0;
+      this.vCliente.Cliente = this.createFreshProveedor();
+      this.reset();
+      this.notificacion = 0;
     },
 
     guardar() {
-
-      if(this.$refs.form.validate()){
-        console.log(this.$store.state.vCliente.editar_item)
-         if(this.$store.state.vCliente.editar_item == false){
-            this.$store
-        .dispatch("guardarCliente", this.token_configuration)
-        .then(this.registroExitoso, this.regitroError);
-        console.log("soy el mesaje de guardar ")
-       // this.$store.state.vCliente.editar_item =false
-       this.mensaje="Registro Guardado"
-        console.log(" voy a guardar")
-       // this.limpiar();
-         }else{
-        this.$store
-        .dispatch("guardarCliente", this.token_configuration)
-        .then(this.registroExitoso, this.regitroError);
-        this.mensaje="Registro Modificado"
-       //  this.$store.state.vCliente.editar_item =false
-          console.log("voy a modificar")
-        // this.limpiar();
-         }
-      
+      if (this.$refs.form.validate()) {
+        console.log(this.$store.state.vCliente.editar_item);
+        if (this.$store.state.vCliente.editar_item == false) {
+          this.$store
+            .dispatch("guardarCliente", this.token_configuration)
+            .then(this.registroExitoso, this.regitroError);
+          console.log("soy el mesaje de guardar ");
+          // this.$store.state.vCliente.editar_item =false
+          this.mensaje = "Registro Guardado";
+          console.log(" voy a guardar");
+          // this.limpiar();
+        } else {
+          this.$store
+            .dispatch("guardarCliente", this.token_configuration)
+            .then(this.registroExitoso, this.regitroError);
+          this.mensaje = "Registro Modificado";
+          //  this.$store.state.vCliente.editar_item =false
+          console.log("voy a modificar");
+          // this.limpiar();
+        }
       }
-        
     },
     registroExitoso(result) {
       console.log("La operación fue correcta:", result);
-       this.vCliente.Cliente = this.createFreshProveedor();
-      this.notificacion=1
+      this.vCliente.Cliente = this.createFreshProveedor();
+      this.notificacion = 1;
     },
     regitroError(error) {
       console.log("Hubo un error al realizar la operación", error);

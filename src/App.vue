@@ -124,6 +124,39 @@
           </v-list-item>
         </v-list-group>
           <!-- fin -->
+
+          <!--  menu Compras -->
+          <v-list-group
+          no-action
+          sub-group
+          value="true"
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title><h3>Compras</h3></v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item link>
+            <v-list-item-title>Compras</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-title>Pedidos</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-list-item link :to="{name: 'formaspago'}">
+            <v-list-item-title>Formas de Pago</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-group>
+          <!-- fin menu Compras -->
+
       </v-list-group>
             <!--fin menu-->
       <!-- otro menu -->
