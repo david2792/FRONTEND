@@ -21,6 +21,9 @@ import * as vMarcaVehiculo from './referenciales-taller/marca.js'
 import * as vColor from './referenciales-taller/color.js'
 import * as vNivel from './referenciales-taller/nivelCombustibles.js'
 import * as vRecepcion from './recepcion-vehiculo/recepciones.js'
+
+// compras
+import * as fpagos from './referencial-compras/formapagos/formapagos'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -42,7 +45,9 @@ export default new Vuex.Store({
     vModelo,
     vNivel,
     vRecepcion,
-    dialogo
+    dialogo,
+    // compras
+    fpagos,
   },
   state: {
     token: null,
