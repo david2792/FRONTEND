@@ -102,7 +102,7 @@
         </v-btn>
       </v-card-actions>
        <v-flex xs12 sm12 md12 xl12 v-if="notificacion==1">
-           <v-alert 
+         <v-alert 
             
             dismissible
             close-icon="mdi-delete"
@@ -113,7 +113,7 @@
            >
       {{this.$store.state.vProducto.mensaje}}
     </v-alert>
-         </v-flex>
+      </v-flex>
     </v-card>
   </v-form>
 </template>

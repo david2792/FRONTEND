@@ -21,6 +21,15 @@ import * as vMarcaVehiculo from './referenciales-taller/marca.js'
 import * as vColor from './referenciales-taller/color.js'
 import * as vNivel from './referenciales-taller/nivelCombustibles.js'
 import * as vRecepcion from './recepcion-vehiculo/recepciones.js'
+import * as vOrden from './orden-trabajo/ordentrabajos.js'
+import * as vMecanico from './referenciales-personas/mecanicos.js'
+
+// caja
+
+ import * as vApertura from './referenciales-cajas/abircaja'
+ import * as vFacturacion from './facturacion/facturacion'
+ import * as vCondicion from './facturacion/condicion'
+ import * as vDocumento from './facturacion/tipoDocumento'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -42,6 +51,13 @@ export default new Vuex.Store({
     vModelo,
     vNivel,
     vRecepcion,
+    vOrden,
+    vMecanico,
+    // caja
+    vApertura,
+    vFacturacion,
+    vCondicion,
+    vDocumento,
     dialogo
   },
   state: {

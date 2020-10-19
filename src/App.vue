@@ -182,7 +182,7 @@
       class="text-center"
       cols="12"
     >
-      {{ new Date().getFullYear() }} — <strong>Desarrollado por Smart Emprendimiento</strong>
+      {{ new Date().getFullYear() }} —@ <span>Desarrollado por Smart Emprendimiento</span>
     </v-col>
     </v-footer>
   </v-app>

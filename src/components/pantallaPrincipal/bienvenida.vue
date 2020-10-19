@@ -1,7 +1,7 @@
 
 <template>
     <v-layout align-start justify-center wrap >
-      <v-flex  xs12 sm12 md12 lg12 xl2 fluid>
+      <v-flex  xs12 sm12 md12 lg12 xl12 fluid>
         <v-alert
       color="grey darken-3 "
       dark
@@ -14,7 +14,7 @@
         <h2 align="center"><span>{{listar}}</span></h2>
     </v-alert>
     </v-flex>
-      <v-flex  xs12 sm12 md12 lg2 x2>
+      <v-flex  xs12 sm12 md12 lg2 xl2>
        <v-card
             color="indigo accent-4"
             dark
@@ -29,7 +29,7 @@
       </v-card>
       </v-flex>
      <!--  -->
-     <v-flex  xs12 sm12 md12 lg2 x2>
+     <v-flex  xs12 sm12 md12 lg2 xl2>
        <v-card
            color="indigo accent-4"
             dark
@@ -44,7 +44,7 @@
       </v-card>
       </v-flex>
       <!--  -->
-       <v-flex  xs12 sm12 md12 lg2 x2>
+       <v-flex  xs12 sm12 md12 lg2 xl2>
        <v-card
             color="indigo accent-4"
             dark
@@ -52,14 +52,14 @@
           >
                <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
             <center><v-icon size="80">local_shipping</v-icon></center>
-             <v-btn color="#BF36" tile  block :to="{name: 'vehiculo'}" >
+             <v-btn color="#BF36" tile  block :to="{name: 'recepcion'}" >
             <v-icon size="30" left></v-icon>Recep.Vehiculo
             </v-btn>
        
       </v-card>
       </v-flex>
       <!--  -->
-       <v-flex  xs12 sm12 md12 lg2 xl2>
+       <v-flex  xs12 sm12 md12 lg2 xll2>
        <v-card
            color="indigo accent-4"
             dark

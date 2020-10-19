@@ -11,6 +11,13 @@ import VistaServicio from '../views/servicio/VistaServicio.vue';
 // taller
 import VistaVehiculo from '../views/vehiculo/VistaVehiculo';
 import VistaRecepcion from '../views/recepcion_vehiculo/VistaRecepcion';
+import VistaOrden from '../views/orden_trabajo/VistaOrden'
+import FormularioOrden from '../views/orden_trabajo/FormularioOrden'
+import prueba from '../views/orden_trabajo/prueba'
+
+// caja
+ import FormularioApertura from '../views/apertura_caja/FormularioApertura'
+ import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
 Vue.use(Router)
 
 var router = new Router({
@@ -75,6 +82,38 @@ var router = new Router({
               libre: true
             }
             },
+            {
+              path: '/ordenes',
+              name: 'orden',
+              component: VistaOrden,
+              meta: {
+                libre: true
+              }
+              },
+              {
+                path: '/ordenesformulario',
+                name: 'ordenformulario',
+                component: FormularioOrden,
+                meta: {
+                  libre: true
+                }
+                },
+                {
+                  path: '/aperturacajas',
+                  name: 'aperturacaja',
+                  component: FormularioApertura,
+                  meta: {
+                    libre: true
+                  }
+                  },
+                  {
+                    path: '/facturaciones',
+                    name: 'facturacion',
+                    component: FormularioFacturacion,
+                    meta: {
+                      libre: true
+                    }
+                    }
   ]
 })
 router.beforeEach((to, from, next) => {
