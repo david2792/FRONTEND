@@ -5,11 +5,13 @@
       <v-layout wrap>
         <v-flex xs12 sm12 md12>
           <v-autocomplete
+          autofocus
           v-model="informe_ot.numerochapa"
           :items="informe_ot.orden_done"
           :item-text="(item) => `${item.RazonSocial} - ${item.numerochapa}`"
           item-value="numerochapa"
           label="Buscar por número de chapa/nombre del cliente"
+          :rules="clienteRules"
         ></v-autocomplete>
         </v-flex>
         <!-- Fecha desde -->
@@ -101,6 +103,9 @@ export default {
       menu1: false,
       menu: false,
       modal: false,
+      clienteRules: [
+        v => !!v || ' Éste campo es necesario!!',
+      ],
     };
   },
   components:{
@@ -110,6 +115,7 @@ export default {
     let header = { "auth-token": this.$store.state.token };
     let configracion = { headers: header };
     this.$store.dispatch("getCabecera", configracion);
+    // this.informe_ot.cabecera = []
   },
 
   computed: {
@@ -120,7 +126,11 @@ export default {
       let header = { "auth-token": this.$store.state.token };
       let configracion = { headers: header };
       this.$store.dispatch("setData", configracion).then(() => {
-        this.$router.push({ path: '/informe_orden_trabajo' })
+        // if (this.informe_ot.cabecera.o_cabecera) {
+          this.$router.push({ path: '/informe_orden_trabajo' })
+        // } else {
+        //   console.log("No existen datos disponibles")
+        // }
       }).catch((err) => {
         console.log(err);
       });

@@ -18,9 +18,7 @@ import prueba from '../views/orden_trabajo/prueba'
 // caja
 import FormularioApertura from '../views/apertura_caja/FormularioApertura'
 import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
-Vue.use(Router)
-import VistaVehiculo from "../views/vehiculo/VistaVehiculo";
-import VistaRecepcion from "../views/recepcion_vehiculo/VistaRecepcion";
+
 // compras
 import Vista from "../components/compras/formaspago/Vista";
 // Informes

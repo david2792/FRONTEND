@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <div id="print-data">
+    <div id="print-data" v-if="informe_ot.cabecera.o_cabecera">
       <div>
         <h2 align-center>INFORME ORDEN DE TRABAJO</h2>
       </div>
@@ -15,59 +15,57 @@
           <div><v-card-text class="pa-2" tile>Fecha</v-card-text></div>
         </v-flex>
       </v-layout>
-      <v-layout
-        wrap
-        v-for="cabecera in informe_ot.cabecera.o_cabecera"
-        :key="cabecera"
-      >
-        <v-flex xs12 sm12 md4>
-          <div>
-            <v-card-text class="pa-2" tile>
-              {{ cabecera.RazonSocial }}
-            </v-card-text>
-          </div>
-        </v-flex>
-        <v-flex xs12 sm12 md4>
-          <div>
-            <v-card-text class="pa-2" tile>
-              {{ cabecera.numerochapa }}
-            </v-card-text>
-          </div>
-        </v-flex>
-        <v-flex xs12 sm12 md4>
-          <div>
-            <v-card-text class="pa-2" tile>
-              {{ cabecera.fechaemision }}
-            </v-card-text>
-          </div>
-        </v-flex>
-        <v-flex xs12 sm12 md12>
-          <div>
-            <v-card-text class="pa-2 font-weight-medium" tile>
-              <p
-                class="pa-2 text-no-wrap secondary text-decoration-underline font-weight-medium"
-                tile
-              >
-                Observación:
-              {{ cabecera.observacionorden }}
-              </p>
-            </v-card-text>
-          </div>
-        </v-flex>
-        <h1>Detalle del cliente:</h1>
-        <v-flex xs12 sm12 md12>
-          <!-- <v-card-text> -->
-          <v-data-table
-            loading
-            loading-text="Cargando datos..."
-            :headers="headers"
-            :items="informe_ot.cabecera.o_detalle"
-            hide-default-footer
-            class="elevation-1"
-          ></v-data-table>
-        <!-- </v-card-text> -->
-        </v-flex>
-      </v-layout>
+      <div v-for="cabecera in informe_ot.cabecera.o_cabecera" :key="cabecera">
+        <v-layout wrap>
+          <v-flex xs12 sm12 md4>
+            <div>
+              <v-card-text class="pa-2" tile>
+                {{ cabecera.RazonSocial }}
+              </v-card-text>
+            </div>
+          </v-flex>
+          <v-flex xs12 sm12 md4>
+            <div>
+              <v-card-text class="pa-2" tile>
+                {{ cabecera.numerochapa }}
+              </v-card-text>
+            </div>
+          </v-flex>
+          <v-flex xs12 sm12 md4>
+            <div>
+              <v-card-text class="pa-2" tile>
+                {{ cabecera.fechaemision }}
+              </v-card-text>
+            </div>
+          </v-flex>
+          <v-flex xs12 sm12 md12>
+            <div>
+              <v-card-text class="pa-2 font-weight-medium" tile>
+                <p
+                  class="pa-2 text-no-wrap secondary text-decoration-underline font-weight-medium"
+                  tile
+                >
+                  Observación:
+                  {{ cabecera.observacionorden }}
+                </p>
+              </v-card-text>
+            </div>
+          </v-flex>
+          <h1>Detalle del cliente:</h1>
+          <v-flex xs12 sm12 md12>
+            <!-- <v-card-text> -->
+            <v-data-table
+              loading
+              loading-text="Cargando datos..."
+              :headers="headers"
+              :items="informe_ot.cabecera.o_detalle"
+              hide-default-footer
+              class="elevation-1"
+            ></v-data-table>
+            <!-- </v-card-text> -->
+          </v-flex>
+        </v-layout>
+      </div>
     </div>
     <v-btn @click="printData">Pint data</v-btn>
   </v-card>
@@ -83,24 +81,24 @@ export default {
         // sortable: true,
         // class: "primary",
       },
-      { 
-        text: "Descripción", 
+      {
+        text: "Descripción",
         value: "descripcion",
         // sortable: true,
         // class: "primary",
-        },
-      { 
-        text: "Precio", 
+      },
+      {
+        text: "Precio",
         value: "precio",
         // sortable: true,
         // class: "primary",
       },
-      { 
+      {
         text: "Cantidad",
         value: "cantidad",
         // sortable: true,
         // class: "primary",
-      }
+      },
     ],
   }),
   name: "Informe_ot",
@@ -108,6 +106,7 @@ export default {
     let header = { "auth-token": this.$store.state.token };
     let configracion = { headers: header };
     this.$store.dispatch("getCabecera", configracion);
+    // this.verificarDatos();
   },
   computed: {
     ...mapState(["informe_ot"]),
@@ -116,6 +115,15 @@ export default {
     printData() {
       this.$htmlToPaper("print-data");
     },
+
+    verificarDatos(){
+      console.log("iniciando:", this.informe_ot.cabecera.o_cabecera[0]);
+      if (this.informe_ot.cabecera.o_cabecera) {
+        console.log("Ooooh boy, Welcome")
+      } else {
+        this.$router.push({path: "/filtro_orden"})
+      }
+    }
   },
 };
 </script>
