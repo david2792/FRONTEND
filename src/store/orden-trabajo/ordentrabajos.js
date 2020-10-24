@@ -73,7 +73,18 @@ export const actions = {
                 commit("SET_ORDEN", orden);
             });
     },
-    
+    getOrdenFacturacion({commit}, configuracion)
+    {
+        axios
+            .get(`orden/listarUno/${state.Recepcion.codigocliente}`, configuracion)
+            .then(result =>{
+                console.log(result.data)  
+             //  state.aux=result.data  
+               commit("SET_BUSCADOR", result.data); 
+            }).catch(error=>{
+                console.log("Error: "+error);
+            });
+    },
     guardarOrden({ commit }, configuracion) {
         console.log(configuracion);
         if (state.editar_item==false) {

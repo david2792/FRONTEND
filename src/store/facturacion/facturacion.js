@@ -56,10 +56,14 @@ export const state = {
 };
 
 export const mutations = {
-    SET_FACTUTA(state, producto){
-      //  console.log(producto);
-        state.productos = producto;
+    SET_FACTUTA(state, facturacion){
+      console.log(facturacion);
+        state.facturaciones = facturacion;
     },
+    SET_MENSAJE(state, mensaje){
+        //  console.log(producto);
+          state.mensaje = mensaje;
+      },
     GET_APERTURA(state, value){
         console.log("Muttations: ", value)
         state.Producto = value;
@@ -114,7 +118,7 @@ export const actions = {
             axios
                 .post('facturacion/guardar', { cabeceras: setCabecera, detalles:setDetalle }, configuracion)
                 .then(result =>{
-                  commit("SET_FACTURA",result);
+                 commit("SET_FACTURA",result);
                     state.mensaje="Registro Guardado"
                 }).catch(error=>{
                     console.log("Error: "+error);

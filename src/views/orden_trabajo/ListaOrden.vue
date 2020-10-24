@@ -17,22 +17,24 @@
       <template v-slot:[`item.opcion`]="{ item }">
        <v-btn
         class="mx-2"
-        fab
+        
         dark
         small
         color="purple darken-4"
          @click="editItem(item)"
               >
         <v-icon dark>add</v-icon>
+        Facturar
         </v-btn>
                <v-btn
         class="mx-2"
-        fab
+        
         dark
         small
         color="pink darken-4"
          @click="editItem(item)"
               >
+              Anular
         <v-icon dark>edit</v-icon>
         </v-btn>
       </template>
@@ -105,9 +107,13 @@ export default {
 
         },
      editItem(item) {
-     this.modal = !this.modal;
-     this.$store.state.vOrden.editar_item = true;
-     this.$store.dispatch("getActualizar",this.token_configuration);  
+ 
+    this.$router.push({
+            name: "facturacion",
+            params: {
+              numero: item.numero
+            }
+          });
     },
     }
 }

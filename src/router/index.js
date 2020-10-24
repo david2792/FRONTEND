@@ -18,14 +18,9 @@ import prueba from '../views/orden_trabajo/prueba'
 // caja
 import FormularioApertura from '../views/apertura_caja/FormularioApertura'
 import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
-Vue.use(Router)
-import VistaVehiculo from "../views/vehiculo/VistaVehiculo";
-import VistaRecepcion from "../views/recepcion_vehiculo/VistaRecepcion";
 // compras
 import Vista from "../components/compras/formaspago/Vista";
 Vue.use(Router);
-
-
 var router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
@@ -100,7 +95,7 @@ var router = new Router({
     {
       path: '/ordenesformulario',
       name: 'ordenformulario',
-      component: FormularioOrden,
+      component: VistaOrden,
       meta: {
         libre: true
       }

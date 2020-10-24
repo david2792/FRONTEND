@@ -13,7 +13,7 @@
         outlined
            color="blue"
             >
-           <strong>FACTURACION</strong><v-icon color="blue" style=" font-size: 38px; ">
+           FACTURACION<v-icon color="blue" style=" font-size: 38px; ">
                 local_grocery_store
             </v-icon>
             <span>CAJERO: {{vFacturacion.Cajero}}</span>
@@ -96,6 +96,15 @@
             outlined
             ></v-select>
          </v-col>
+          <v-col class=" pt-0 mt-0" cols="12" sm="2" md="2" >
+           <v-text-field
+           v-model="numero"
+            outlined  
+            dense
+            label="Nro Orden de Trabajo"
+            placeholder="0"   
+          ></v-text-field>
+            </v-col>
         <v-col  class=" pt-0 mt-0" cols="12" sm="12" md="12" >
             <v-divider></v-divider>
         </v-col>
@@ -158,6 +167,7 @@
 
          </v-row>
          <!-- FIN -->
+         
          <!-- producto -->
                   <v-row>
             <v-col class=" pt-0 mt-0" cols="12" sm="2" md="1" >
@@ -241,7 +251,7 @@
                   <template v-slot:items>
                   <td class="text-xs-center">{{item.codigoproducto}}</td>
                   <td class="text-xs-center" v-if="2==3" ></td>
-                 <td class="text-xs-center">{{item.descripcion}}</td>
+                 <td class="text-xl-center" >{{item.descripcion}}</td>
                   <td class="text-xs-center">{{(item.cantidad )}}</td>
                   <td class="text-xs-center" >{{ item.precio | currency }}</td>
                   <td  class="text-xs-center">{{item.subtotal}}</td>
@@ -253,14 +263,14 @@
                 </template>
               </v-data-table>
                <v-flex class="text-xl">
-                <strong><h2>TOTAL DEL TRABAJO:{{fromatodemoneda(vFacturacion.DetalleCabecera.total=calcularTotal) }}</h2></strong>
+                <strong><h3>TOTAL:{{fromatodemoneda(vFacturacion.DetalleCabecera.total=calcularTotal) }}</h3></strong>
               </v-flex>
         </v-col>
         <v-col cols="6" sm="6" md="2"  >
-         <v-btn color="red " outlined large @click="guardar()" >COBRAR<v-icon>save</v-icon></v-btn>
+         <v-btn color="red " outlined large @click="guardar()" >GUARDAR<v-icon>save</v-icon></v-btn>
         </v-col>
         <v-col cols="6" sm="6" md="2"  >
-         <v-btn color="succes " outlined large  >CANCELAR<v-icon>not_interested</v-icon></v-btn>
+         <v-btn color="succes " outlined large  @click="cancelar()" >CANCELAR<v-icon>not_interested</v-icon></v-btn>
         </v-col>
         <v-col cols=6 sm="6" md="12" v-if="notificacion==1">
             <v-alert 
@@ -272,7 +282,7 @@
             type="info"
             outlined
            >
-      {{this.$store.state.vApertura.mensaje}}
+      {{this.$store.state.vFacturacion.mensaje}}
     </v-alert>
         </v-col>
            </v-row>
@@ -389,6 +399,46 @@
     </v-card>
     </v-dialog>
     <!-- fin productos -->
+    <!-- dialogo cobro -->
+   <v-dialog v-model="dialogocobro" max-width="500px">
+       <v-card>
+        <v-card-text>
+         <v-container  grid-list-md>
+           <v-layout wrap>
+              <v-row>
+                 <v-col cols="12" sm="12" md="12">
+                   <h2  style=" font-size: 18pt;">{{fromatodemoneda(vFacturacion.DetalleCabecera.total)}}</h2>
+                 </v-col>
+                   <v-col cols="12" sm="12" md="12">
+                   <v-text-field
+                   v-model="pago"
+                    style=" font-size: 18pt;"
+                   id="separadorMiles"
+                   @click="separador()"
+                   @keyup="calcularVuelto()"
+                     label="Monto de Pago"
+                    ></v-text-field>
+                 </v-col>
+                  <v-col cols="12" sm="12" md="12">
+                   <v-text-field
+                   v-model="vuelto"
+                   style=" font-size: 18pt;"
+                     label="Vuelto"
+                    ></v-text-field>
+                 </v-col>
+                 <v-col cols="6" sm="6" md="2"   class=" ml-5"  >
+                <v-btn color="red " large @click="cobrar()" >Cobrar<v-icon>save</v-icon></v-btn>
+                </v-col>
+                <v-col cols="6" sm="6" md="2"  class=" ml-15"  >
+                <v-btn color="pink " large @click="cancelar()" >Cancelar<v-icon>save</v-icon></v-btn>
+                </v-col>
+              </v-row>
+           </v-layout>
+         </v-container>
+        </v-card-text>
+       </v-card>
+   </v-dialog>
+    <!-- fin dialogo cobro -->
 </v-form>
 </template>
 <script>
@@ -397,7 +447,9 @@ import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
+      numero:'',
       // detalle de clientes
+
       razonsocial:'',
       ci:'',
       direccion:'',
@@ -407,7 +459,10 @@ export default {
       valid: true,
       mensaje:'',
       search:'',
+      pago:'',
+      vuelto:'',
       notificacion:0,
+      dialogocobro:false,
       dialogoProducto:false,
       dialogoCliente:false,
       token_configuration: [],
@@ -417,7 +472,7 @@ export default {
         { text: 'Borrar', value: 'borrar', sortable: false,class:"error"},
         { text: 'Codigo Producto', value: 'codigoproducto', sortable: false,class:"error"},
         // { text: 'codigoimpuesto', value: 'codigoimpuesto', sortable: false, align: ' d-none'},
-        { text: 'Descripciones', value: 'descripcion', sortable: false,class:"error"},
+        { text: 'Descripciones', value: 'descripcion', sortable: false,class:"error text-xl-center"},
         { text: 'Cantidad', value: 'cantidad', sortable: false,class:"error" },
         { text: 'Precio', value: 'precio', sortable: false,class:"error"},
         { text: 'Sub-Total', value: 'subtotal', sortable: false,class:"error" },
@@ -457,7 +512,8 @@ export default {
      this.$store.dispatch("getDocumento", this.token_configuration);
       this.$store.state.vFacturacion.Cabecera.CodigoTiposDocumento=2
       this.$store.dispatch("getNumeroTimbrado", this.token_configuration);
-    // this.validarTimbrado();
+      this.CargarCliente();
+      this.numero = this.$route.params.numero;
   },
   computed: {
     ...mapState(["vFacturacion","vCondicion","vDocumento","vCliente","vProducto"]),
@@ -481,6 +537,13 @@ export default {
   },
 
   methods: {
+    CargarCliente()
+    {
+      this.vFacturacion.Cabecera.CodigoCliente=0
+      this.razonsocial="CLIENTE OCASIONAL"
+      this.ruc="xxx"
+      this.ci="xxx"
+    },
     createFreshProveedor() {
       return {
             Monto:""
@@ -542,9 +605,77 @@ export default {
         this.cerrarBuscadorProducto()
         
     },
+    limpiarTodo()
+    {
+      return {
+        codigoproducto:'',
+        descripcion:'',
+        cantidad:'',
+        precio:'',
+        subtotal:'',
+        stockactual:'',
+        total:'',
+        datosDetalle:[]
+      }
+    },
+    separador(){
+        let separador = document.getElementById('separadorMiles');
+        separador.addEventListener('input', (e) => {
+        let entrada = e.target.value.split(','),
+        parteEntera = entrada[0].replace(/\./g, ''),
+        parteDecimal = entrada[1],
+        salida = parteEntera.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+        e.target.value = salida + (parteDecimal !== undefined ? ',' + parteDecimal : '');
+        }, false);
+    },
+    calcularVuelto()
+    {
+     
+      let resultado =this.fromatodemoneda( this.pago.split('.').join("") - this.vFacturacion.DetalleCabecera.total)
+     this.vuelto= resultado
+    },
+    limpiarTabla()
+    {
+        this.vFacturacion.DetalleCabecera.datosDetalle=[]
+    },
+    limpiarDatosProductos()
+    {
+      this.vFacturacion.DetalleCabecera=this.limpiarTodo();
+    },
+    limpiarCobro()
+    {
+      this.vuelto=""
+      this.pago=""
+    },
+     limpiarAgegarProductos() {
+    this.vFacturacion.DetalleCabecera.codigoproducto=""
+    this.vFacturacion.DetalleCabecera.descripcion=""
+    this.vFacturacion.DetalleCabecera.cantidad=""
+    this.vFacturacion.DetalleCabecera.precio=""
+    this.vFacturacion.DetalleCabecera.stockactual=""
+
+    },
+    cancelar()
+    {
+      this.limpiarCobro()
+      this.dialogocobro=false
+    },
+    
     agregarDatosTabla()
     {
-       this.vFacturacion.DetalleCabecera.datosDetalle.push(
+      let bandera=0
+      if(this.vFacturacion.DetalleCabecera.codigoproducto.length==0)
+      {
+        this.bandera=0
+      }else{
+        this.bandera=1
+      }
+      if(this.bandera==1)
+      {
+          if(this.vFacturacion.DetalleCabecera.cantidad.length==0)
+          {
+        this.vFacturacion.DetalleCabecera.cantidad=1
+        this.vFacturacion.DetalleCabecera.datosDetalle.push(
             {  
              
               codigoproducto:this.vFacturacion.DetalleCabecera.codigoproducto ,
@@ -553,7 +684,21 @@ export default {
               precio:this.vFacturacion.DetalleCabecera.precio,
               subtotal:this.vFacturacion.DetalleCabecera.precio*this.vFacturacion.DetalleCabecera.cantidad
             })
-          //   console.log(this.fromatodemoneda(this.vFacturacion.DetalleCabecera.precio))
+        this.limpiarAgegarProductos()
+      }else{
+         this.vFacturacion.DetalleCabecera.datosDetalle.push(
+            {  
+             
+              codigoproducto:this.vFacturacion.DetalleCabecera.codigoproducto ,
+              descripcion:this.vFacturacion.DetalleCabecera.descripcion,
+              cantidad:this.vFacturacion.DetalleCabecera.cantidad,
+              precio:this.vFacturacion.DetalleCabecera.precio,
+              subtotal:this.vFacturacion.DetalleCabecera.precio*this.vFacturacion.DetalleCabecera.cantidad
+            })
+        this.limpiarAgegarProductos()
+      }
+      }
+      
     },
      eliminarDetalle(arr,item){
       let i=arr.indexOf(item);
@@ -577,6 +722,12 @@ export default {
     guardar()
     {
       this.validarTimbrado()
+      this.dialogocobro=true;
+      this.notificacion=0
+    },
+    cobrar(){
+     if(this.vuelto>=0)
+     {
       this.vFacturacion.Cabecera.CodigoSucursal=this.vFacturacion.CodigoSucursal;
       this.vFacturacion.Cabecera.NumeroTimbrado=this.vFacturacion.Cabecera.NumeroTimbrado;
       this.vFacturacion.Cabecera.PuntoExpedicion=this.vFacturacion.PuntoExpedicion;
@@ -585,16 +736,19 @@ export default {
       this.vFacturacion.Cabecera.CodigoCondicion=this.$refs.condicion.value.CodigoCondicion;
       this.vFacturacion.Cabecera.CodigoSucursal=this.vFacturacion.CodigoSucursal;
       this.vFacturacion.Cabecera.numeroApertura=this.vFacturacion.numeroApertura;
-      console.log("soy el numero de apertura "+this.vFacturacion.numeroApertura)
-      this.vFacturacion.Cabecera.CodigoFormasCobro=0;
-      console.log(this.vFacturacion.Cabecera)
-      console.log(this.vFacturacion.DetalleCabecera)
-        this.$store
+      this.vFacturacion.Cabecera.CodigoFormasCobro=0; 
+      this.$store
         .dispatch("guardarFactura", this.token_configuration)
-        .then(this.regitroError);
+        .then(this.registroExitoso,this.regitroError); 
+     }
     },
      registroExitoso(result) {
-      //  
+      this.CargarCliente();
+      this.notificacion=1
+      this.limpiarDatosProductos()
+      this.limpiarCobro()
+      this.dialogocobro=false
+     
     },
     regitroError(error) {
       console.log("Hubo un error al realizar la operación", error);
@@ -602,33 +756,6 @@ export default {
     reset () {
         this.$refs.form.reset()
       },
-    limpiar() {
-     this.vApertura.Apertura = this.createFreshProveedor();
-     this.reset ();
-      this.notificacion=0;
-    },
-
-    // guardar() {
-
-    //   if(this.$refs.form.validate()){
-    //     this.$store.state.vApertura.Apertura.CodigoUsuario=this.$store.state.usuario.codigo
-    //     console.log(this.vApertura.Apertura.Monto.split('.').join(""))
-    //      this.$store
-    //     .dispatch("guardarApertura", this.token_configuration)
-    //     .then(this.registroExitoso, this.regitroError);
-    //     console.log("soy el mesaje de guardar ")
-    //     console.log(" voy a guardar")
-    //   }
-        
-    // },
-    registroExitoso(result) {
-      console.log("La operación fue correcta:", result);
-       this.vApertura.Apertura = this.createFreshProveedor();
-      this.notificacion=1
-    },
-    regitroError(error) {
-      console.log("Hubo un error al realizar la operación", error);
-    },
 
     separador(){
         let separador = document.getElementById('separadorMiles');
