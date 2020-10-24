@@ -9,8 +9,9 @@
           :items="informe_ot.orden_done"
           :item-text="(item) => `${item.RazonSocial} - ${item.numerochapa}`"
           item-value="numerochapa"
-          label="Buscar por número de chapa/nombre del cliente"
-        ></v-autocomplete>
+          placeholder="Buscar por número de chapa/nombre del cliente"
+          >
+          </v-autocomplete>
         </v-flex>
         <!-- Fecha desde -->
         <v-flex xs12 sm6 md5>

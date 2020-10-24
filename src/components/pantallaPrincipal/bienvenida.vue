@@ -151,7 +151,22 @@
       </v-card>
       </v-flex>
       <!--  -->
-     
+       <!--  -->
+       <v-flex  xs12 sm12 md12 lg2 xl2  class="pt-2">
+       <v-card
+           color="indigo accent-4"
+            dark
+           class="mr-1 "
+          >
+               <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
+            <center><v-icon size="80">content_paste</v-icon></center>
+             <v-btn color="#BF36" tile  block  :to="{name: 'Filtro_orden'}">
+            <v-icon size="30" left></v-icon>Informe Orden
+            </v-btn>
+       
+      </v-card>
+      </v-flex>
+      <!--  -->
     </v-layout>
 
 </template>
