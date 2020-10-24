@@ -2,31 +2,19 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 export const state = {
-    recepciones: [],
+    ordenes: [],
     aux:[],
-    Recepcion:{
+    Orden:{
         codigosucursal:"",
         puntoexpedicion:"",
         numero:"",
+        fechaemision:"",
+        codigoestadoorden:"",
+        observacion:"",
+        CodigoUsuario:"",
         chapa:"",
-        codigocliente:"",
-        recibidopor:"",
-        estado:"",
-        observaciones:"",
-        fechaentrada:"",
-        codigosucursal:"",
-        puntoexpedicion:"",
-        codigovehiculo:"",
-        codigonivelcombustible:"",
-        km:"",
-        
-    },
-    detalleRecepcion:{
-        codigosucursal:"",
-        puntoexpedicion:"",
-        codigovehiculo:"",
-        codigonivelcombustible:"",
-        km:"",
+        fechaemision:"",
+        detalles:[] 
     },
     configuracion: [],
     mensaje:'',
@@ -37,15 +25,20 @@ export const state = {
 };
 
 export const mutations = {
-    SET_RECEPCION(state, recepcion){
-        console.log(recepcion);
-        state.recepciones = recepcion;
+    SET_ORDEN(state, orden){
+        console.log(orden);
+        state.ordenes = orden;
     },
+    SET_DETALLEORDEN(state, orden){
+        console.log(orden);
+        state.ordenes = orden;
+    }
+    ,
     SET_BUSCADOR(state,resultado){
         console.log(resultado)
         state.aux=resultado
     },
-    GET_RECEPCION(state, value){
+    GET_ORDEN(state, value){
         console.log("Muttations: ", value)
         state.Recepcion = value;
     },
@@ -71,39 +64,37 @@ export const actions = {
             });
         
     },
-    getRecepciones({commit}, configuracion){
+    getOrdenes({commit}, configuracion){
         console.log(configuracion);
         axios
-            .get('rvehiculo/listar', configuracion)
-            .then(recepcion => recepcion.data)
-            .then(recepcion => {
-                commit("SET_RECEPCION", recepcion);
+            .get('orden/listar', configuracion)
+            .then(orden => orden.data)
+            .then(orden => {
+                commit("SET_ORDEN", orden);
             });
     },
     
-    guardarRecepcion({ commit }, configuracion) {
+    guardarOrden({ commit }, configuracion) {
         console.log(configuracion);
         if (state.editar_item==false) {
-            console.log("cabecera", state.Recepcion)
+            console.log("cabecera", state.Orden)
             //console.log("detalle", state.detalleRecepcion)
-            let setDetalle= [];
-           /// setDetalle=state.detalleRecepcion;
-            let setRecepcion = state.Recepcion;
+            let setOrden = state.Orden;
             axios
-                .post('rvehiculo/guardar', { recepciones: setRecepcion }, configuracion)
+                .post('orden/guardar', { ordenes: setOrden }, configuracion)
                 .then(result =>{
-                    commit("SET_RECEPCION", result.data);
+                    commit("SET_ORDEN", result.data);
                     state.mensaje="Registro Guardado"
                 }).catch(error=>{
                     state.mensaje="ERROR"
                     console.log("Error: "+error);
                 });
         }else{
-            let setRecepcion = state.Recepcion;
+            let setOrden = state.Orden;
             axios
-                .put('rvehiculo/actualizar', { recepciones: setRecepcion }, configuracion)
+                .put('rvehiculo/actualizar', { ordenes: setOrden }, configuracion)
                 .then(result =>{
-                    commit("SET_RECEPCION", result.data);
+                    commit("SET_ORDEN", result.data);
                     state.mensaje="Registro Guardado"
                 }).catch(error=>{
                     state.mensaje="ERROR"
@@ -112,16 +103,17 @@ export const actions = {
         }
     },
 
-    getRecepcion({commit}, item){
+    getActualizar({commit}, item){
         console.log("Item recibido", item);
-        commit("GET_RECEPCION", item);
+        commit("GET_ORDEN", item);
     },
+ 
 
 }
 
 export const getters = {
-    setRecepcion: (state) => {
-        console.log(state.Recepcion.numero)
-        return state.recepcion;
+    setOrden: (state) => {
+        console.log(state.Orden.numero)
+        return state.orden;
     }
 };

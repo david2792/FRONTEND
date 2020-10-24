@@ -9,6 +9,16 @@ import VistaCliente from "../views/cliente/VistaCliente.vue";
 import VistaProducto from "../views/producto/VistaProducto.vue";
 import VistaServicio from "../views/servicio/VistaServicio.vue";
 // taller
+import VistaVehiculo from '../views/vehiculo/VistaVehiculo';
+import VistaRecepcion from '../views/recepcion_vehiculo/VistaRecepcion';
+import VistaOrden from '../views/orden_trabajo/VistaOrden'
+import FormularioOrden from '../views/orden_trabajo/FormularioOrden'
+import prueba from '../views/orden_trabajo/prueba'
+
+// caja
+import FormularioApertura from '../views/apertura_caja/FormularioApertura'
+import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
+Vue.use(Router)
 import VistaVehiculo from "../views/vehiculo/VistaVehiculo";
 import VistaRecepcion from "../views/recepcion_vehiculo/VistaRecepcion";
 // compras
@@ -17,6 +27,7 @@ import Vista from "../components/compras/formaspago/Vista";
 import Informe_Orden_Trabajo from '../views/informes/orden_trabajo/Orden_Trabajo'
 import Filtro_orden from '../views/informes/orden_trabajo/Filtro_orden'
 Vue.use(Router);
+
 
 var router = new Router({
   mode: "history",
@@ -44,41 +55,74 @@ var router = new Router({
       component: VistaCliente,
       meta: {
         administrador: true,
-      },
+      }
     },
+
     // rutas de productos
     {
-      path: "/productos",
-      name: "producto",
+      path: '/productos',
+      name: 'producto',
       component: VistaProducto,
       meta: {
-        administrador: true,
-      },
+        administrador: true
+      }
     },
     {
-      path: "/servicios",
-      name: "servicio",
+      path: '/servicios',
+      name: 'servicio',
       component: VistaServicio,
       meta: {
-        administrador: true,
-      },
+        administrador: true
+      }
     },
     // taller
     {
-      path: "/vehiculos",
-      name: "vehiculo",
+      path: '/vehiculos',
+      name: 'vehiculo',
       component: VistaVehiculo,
       meta: {
-        libre: true,
-      },
+        libre: true
+      }
     },
     {
-      path: "/recepciones",
-      name: "recepcion",
+      path: '/recepciones',
+      name: 'recepcion',
       component: VistaRecepcion,
       meta: {
-        libre: true,
-      },
+        libre: true
+      }
+    },
+    {
+      path: '/ordenes',
+      name: 'orden',
+      component: VistaOrden,
+      meta: {
+        libre: true
+      }
+    },
+    {
+      path: '/ordenesformulario',
+      name: 'ordenformulario',
+      component: FormularioOrden,
+      meta: {
+        libre: true
+      }
+    },
+    {
+      path: '/aperturacajas',
+      name: 'aperturacaja',
+      component: FormularioApertura,
+      meta: {
+        libre: true
+      }
+    },
+    {
+      path: '/facturaciones',
+      name: 'facturacion',
+      component: FormularioFacturacion,
+      meta: {
+        libre: true
+      }
     },
     // Compras
     {
@@ -108,6 +152,7 @@ var router = new Router({
     }
   ],
 });
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.libre)) {
     next();

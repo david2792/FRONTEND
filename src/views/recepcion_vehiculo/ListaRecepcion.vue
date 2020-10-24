@@ -25,6 +25,7 @@
               >
                 <v-icon dark>mdi-pencil</v-icon>
               </v-btn>
+             
       </template>
         <template v-slot:items>
            <td>{{ props.item.numero }}</td>
@@ -33,7 +34,7 @@
           <td>{{ props.item.observaciones }}</td>
           <td>{{ props.item.km }}</td>
           <td>{{ props.item.nivel }}</td>
-          <td>{{ props.item.fechaentrada }}</td>
+          <td>{{ props.item.fechaentrada}}</td>
            <td>{{ props.item.estadorecepcion }}</td>
       <td></td>
 
@@ -51,6 +52,7 @@ export default {
         return{
             search: "",
             token_configuration: [],
+           
       headers: [
          { text: "Opciones", value: "opcion", sortable: false,class:"primary " },
           { text: "NUMERO ", value: "numero", sortable: true,class:"primary " },
@@ -83,7 +85,11 @@ export default {
       },
     },
     },
+ 
     methods:{
+    formatDate(value) {
+      return moment(value).format("MMMM DD YYYY")
+  },
         listar(){
         let header = {'auth-token': this.$store.state.token};
         this.token_configuration = {headers: header};
@@ -92,7 +98,7 @@ export default {
         },
      editItem(item) {
      this.modal = !this.modal;
-     this.$store.state.vVehiculo.editar_item = true;
+     this.$store.state.vRecepcion.editar_item = true;
      this.$store.dispatch("getRecepcion", item);  
      console.log("Hello wey"+ item);
     },

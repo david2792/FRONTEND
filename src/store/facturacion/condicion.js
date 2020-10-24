@@ -3,13 +3,13 @@ import Vuex from 'vuex';
 import axios from 'axios';
 
 export const state = {
-    niveles: [],
+    Condiciones: [],
 };
 
 export const mutations = {
-    SET_NIVEL(state, nivel){
-        console.log(nivel);
-        state.niveles = nivel;
+    SET_CONDICION(state, condicion){
+        console.log(condicion);
+        state.Condiciones = condicion;
     },
     SET_AUX(state, Aux){
         console.log(Aux);
@@ -18,14 +18,14 @@ export const mutations = {
 };
 
 export const actions = {
-    getNiveles({commit}, configuracion){
+    getCondicion({commit}, configuracion){
         console.log(configuracion);
         axios
-            .get('nivelcombustibles', configuracion)
-            .then(nivel => nivel.data)
-            .then(nivel => {
-              console.log(" "+nivel)
-               commit("SET_NIVEL", nivel);
+            .get('condicion', configuracion)
+            .then(condicion => condicion.data)
+            .then(condicion => {
+              console.log(condicion)
+               commit("SET_CONDICION", condicion);
                 // let auxiliar=[ciudad]
                 // console.log(auxiliar)
                 // commit("SET_AUX", auxiliar);
