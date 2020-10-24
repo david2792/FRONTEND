@@ -35,6 +35,9 @@ import * as vMecanico from './referenciales-personas/mecanicos.js'
 
 // compras
 import * as fpagos from './referencial-compras/formapagos/formapagos'
+
+// informes
+import * as informe_ot from './informes/orden_trabajo'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -66,7 +69,8 @@ export default new Vuex.Store({
     dialogo,
     // compras
     fpagos,
-
+    // informes
+    informe_ot
   },
   state: {
     token: null,

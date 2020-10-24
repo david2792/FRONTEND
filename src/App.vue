@@ -156,7 +156,31 @@
           </v-list-item>
         </v-list-group>
           <!-- fin menu Compras -->
-
+          <!-- Informes -->
+          <v-list-group
+          no-action
+          sub-group
+          value="true"
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title><h3>Informes</h3></v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item link :to="{name: 'Filtro_orden'}">
+            <v-list-item-title>Orden Compras</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+          <v-list-item link>
+            <v-list-item-title>Recepciones</v-list-item-title>
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+          </v-list-item>
+        </v-list-group>
+          <!-- fin Informes -->
       </v-list-group>
             <!--fin menu-->
       <!-- otro menu -->

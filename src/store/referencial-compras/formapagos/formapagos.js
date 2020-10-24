@@ -49,7 +49,7 @@ export const actions = {
                     console.log(err);
                 });
         } else {
-            console.log("Oooh boy, not today!")
+            console.log("Oooh boy, yes today!")
         }
     }
 };

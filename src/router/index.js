@@ -20,6 +20,9 @@ import FormularioApertura from '../views/apertura_caja/FormularioApertura'
 import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
 // compras
 import Vista from "../components/compras/formaspago/Vista";
+// Informes
+import Informe_Orden_Trabajo from '../views/informes/orden_trabajo/Orden_Trabajo'
+import Filtro_orden from '../views/informes/orden_trabajo/Filtro_orden'
 Vue.use(Router);
 var router = new Router({
   mode: "history",
@@ -125,6 +128,23 @@ var router = new Router({
         administrador: true,
       },
     },
+    // informes
+    {
+      path: '/informe_orden_trabajo',
+      name: 'Informe_Orden_Trabajo',
+      component: Informe_Orden_Trabajo,
+      meta:{
+        administrador: true
+      }
+    },
+    {
+      path: '/filtro_orden',
+      name:'Filtro_orden',
+      component: Filtro_orden,
+      meta:{
+        administrador: true
+      }
+    }
   ],
 });
 
