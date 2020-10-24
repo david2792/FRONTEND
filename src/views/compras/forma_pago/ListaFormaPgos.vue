@@ -11,7 +11,6 @@
       :headers="headers"
       :items="fpagos.fpagos"
       :search="search"
-      id="cabecera"
       class="elevation-4"
     >
       <template v-slot:[`item.opcion`]="{ item }">
