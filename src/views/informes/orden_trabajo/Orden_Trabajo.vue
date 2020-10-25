@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <div id="print-data" v-if="informe_ot.cabecera.o_cabecera">
+    <div id="print-data">
       <div>
         <h2 align-center>INFORME ORDEN DE TRABAJO</h2>
       </div>
@@ -15,26 +15,26 @@
           <div><v-card-text class="pa-2" tile>Fecha</v-card-text></div>
         </v-flex>
       </v-layout>
-      <div v-for="cabecera in informe_ot.cabecera.o_cabecera" :key="cabecera">
+      <div>
         <v-layout wrap>
           <v-flex xs12 sm12 md4>
             <div>
               <v-card-text class="pa-2" tile>
-                {{ cabecera.RazonSocial }}
+                {{ informe_ot.cabecera.RazonSocial }}
               </v-card-text>
             </div>
           </v-flex>
           <v-flex xs12 sm12 md4>
             <div>
               <v-card-text class="pa-2" tile>
-                {{ cabecera.numerochapa }}
+                {{ informe_ot.cabecera.numerochapa }}
               </v-card-text>
             </div>
           </v-flex>
           <v-flex xs12 sm12 md4>
             <div>
               <v-card-text class="pa-2" tile>
-                {{ cabecera.fechaemision }}
+                {{ informe_ot.cabecera.fechaemision }}
               </v-card-text>
             </div>
           </v-flex>
@@ -45,8 +45,8 @@
                   class="pa-2 text-no-wrap secondary text-decoration-underline font-weight-medium"
                   tile
                 >
-                  Observación:
-                  {{ cabecera.observacionorden }}
+                  Km recepción:
+                  {{ informe_ot.cabecera.kmrecepcion }}
                 </p>
               </v-card-text>
             </div>
@@ -55,13 +55,24 @@
           <v-flex xs12 sm12 md12>
             <!-- <v-card-text> -->
             <v-data-table
-              loading
-              loading-text="Cargando datos..."
               :headers="headers"
-              :items="informe_ot.cabecera.o_detalle"
+              :items="informe_ot.detalleOrdenTrabajo"
               hide-default-footer
               class="elevation-1"
-            ></v-data-table>
+              :expanded.sync="expanded"
+              show-expand
+              single-expand
+            >
+              <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                  <div class="row sp-details">
+                    <div tile>
+                        OBSERVACIÓN: &nbsp;&nbsp;&nbsp; {{item.observacion}}
+                    </div>
+                </div>
+                </td>
+              </template>
+            </v-data-table>
             <!-- </v-card-text> -->
           </v-flex>
         </v-layout>
@@ -74,7 +85,16 @@
 import { mapState } from "vuex";
 export default {
   data: () => ({
+    expanded: [],
     headers: [
+      {
+        text: "N° Recepción",
+        value: "numero",
+      },
+      {
+        text: "Fecha",
+        value: "fechaemision",
+      },
       {
         text: "Código Producto",
         value: "codigoproducto",
@@ -105,7 +125,7 @@ export default {
   mounted() {
     let header = { "auth-token": this.$store.state.token };
     let configracion = { headers: header };
-    this.$store.dispatch("getCabecera", configracion);
+    this.$store.dispatch("getDetalleOrdenTrabajo", configracion);
     // this.verificarDatos();
   },
   computed: {
@@ -116,14 +136,14 @@ export default {
       this.$htmlToPaper("print-data");
     },
 
-    verificarDatos(){
+    verificarDatos() {
       console.log("iniciando:", this.informe_ot.cabecera.o_cabecera[0]);
       if (this.informe_ot.cabecera.o_cabecera) {
-        console.log("Ooooh boy, Welcome")
+        console.log("Ooooh boy, Welcome");
       } else {
-        this.$router.push({path: "/filtro_orden"})
+        this.$router.push({ path: "/filtro_orden" });
       }
-    }
+    },
   },
 };
 </script>

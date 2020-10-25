@@ -5,18 +5,44 @@
       <v-layout wrap>
         <v-flex xs12 sm12 md12>
           <v-autocomplete
-          autofocus
-          v-model="informe_ot.numerochapa"
-          :items="informe_ot.orden_done"
-          :item-text="(item) => `${item.RazonSocial} - ${item.numerochapa}`"
-          item-value="numerochapa"
-          label="Buscar por número de chapa/nombre del cliente"
-          :rules="clienteRules"
-        ></v-autocomplete>
+            autofocus
+            v-model="informe_ot.numerochapa"
+            :items="informe_ot.orden_done"
+            :item-text="(item) => `${item.RazonSocial} - ${item.numerochapa}`"
+            item-value="numerochapa"
+            label="Buscar por número de chapa/nombre del cliente"
+            :rules="clienteRules"
+          ></v-autocomplete>
         </v-flex>
+        <!-- Opción de filtrado -->
+        <v-spacer></v-spacer>
+        <v-flex xs12 sm12 md12>
+          <v-radio-group v-model="informe_ot.estadoorden" row>
+            <v-radio
+              color="red"
+              @click="estadoorden"
+              label="Pendientes"
+              value= "1"
+            ></v-radio>
+            <v-radio
+              color="success"
+              @click="estadoorden"
+              label="Completados"
+              value= "2"
+            ></v-radio>
+            <v-radio
+              color="primary"
+              @click="estadoorden"
+              label="Ambos"
+              value= "3"
+            ></v-radio>
+          </v-radio-group>
+        </v-flex>
+        <!-- Fin -->
         <!-- Fecha desde -->
         <v-flex xs12 sm6 md5>
           <v-menu
+            :disabled="isEditing"
             ref="menu"
             v-model="menu"
             :close-on-content-click="false"
@@ -27,6 +53,7 @@
           >
             <template v-slot:activator="{ on }">
               <v-text-field
+                :disabled="isEditing"
                 v-model="informe_ot.fechaDesde"
                 label="Fecha Desde"
                 v-on="on"
@@ -53,6 +80,7 @@
         <!-- Fecha Hasta -->
         <v-flex xs12 sm6 md5>
           <v-menu
+            :disabled="isEditing"
             ref="menu1"
             v-model="menu1"
             :close-on-content-click="false"
@@ -63,6 +91,7 @@
           >
             <template v-slot:activator="{ on }">
               <v-text-field
+                :disabled="isEditing"
                 v-model="informe_ot.fechaHasta"
                 label="Fecha Desde"
                 v-on="on"
@@ -86,12 +115,15 @@
           </v-menu>
         </v-flex>
         <!-- fin Fecha Hasta -->
+        <v-spacer></v-spacer>
         <v-flex xs12 sm6 md6>
-          <v-btn @click="filtrarDatos">FFILTRAR DATOS</v-btn>
+          <v-btn @click="filtrarDatos">FILTRAR DATOS</v-btn>
+        </v-flex>
+        <v-flex xs12 sm6 md6>
+          <v-btn @click="mostrartodo">MOSTRAR TODO</v-btn>
         </v-flex>
       </v-layout>
     </v-card-text>
-
   </v-card>
 </template>
 <script>
@@ -103,12 +135,12 @@ export default {
       menu1: false,
       menu: false,
       modal: false,
-      clienteRules: [
-        v => !!v || ' Éste campo es necesario!!',
-      ],
+      row: null,
+      isEditing: false,
+      clienteRules: [(v) => !!v || " Éste campo es necesario!!"],
     };
   },
-  components:{
+  components: {
     // Orden_trabajo,
   },
   mounted() {
@@ -121,19 +153,48 @@ export default {
   computed: {
     ...mapState(["informe_ot"]),
   },
-  methods:{
-    filtrarDatos(){
+  methods: {
+    filtrarDatos() {
       let header = { "auth-token": this.$store.state.token };
       let configracion = { headers: header };
-      this.$store.dispatch("setData", configracion).then(() => {
-        // if (this.informe_ot.cabecera.o_cabecera) {
-          this.$router.push({ path: '/informe_orden_trabajo' })
-        // } else {
-        //   console.log("No existen datos disponibles")
-        // }
+      this.$store
+        .dispatch("setData", configracion)
+        .then(() => {
+          // if (this.informe_ot.cabecera.o_cabecera) {
+          this.$router.push({ path: "/informe_orden_trabajo" });
+          // } else {
+          //   console.log("No existen datos disponibles")
+          // }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    mostrartodo() {
+      this.setCabecera();
+      console.log("Mostrar todo");
+      let header = { "auth-token": this.$store.state.token };
+      let configracion = { headers: header };
+      console.log(configracion);
+      this.$store.dispatch("getDetalleOrdenTrabajo", configracion).then(() => {
+        this.$router.push({ path: "/informe_orden_trabajo" });
       }).catch((err) => {
-        console.log(err);
+        console.log(err)
       });
+    },
+    estadoorden() {
+      console.log(this.informe_ot.estadoorden);
+      if (this.informe_ot.estadoorden == 3) {
+        this.isEditing = !this.isEditing;
+      } else {
+        this.isEditing = false;
+      }
+    },
+
+    setCabecera(){
+      console.log(this.informe_ot.numerochapa);
+      this.informe_ot.cabecera = this.informe_ot.orden_done.find(element => element.numerochapa = this.informe_ot.numerochapa);
+      console.log(this.informe_ot.cabecera);
     }
   },
 };
