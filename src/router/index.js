@@ -18,7 +18,6 @@ import prueba from '../views/orden_trabajo/prueba'
 // caja
 import FormularioApertura from '../views/apertura_caja/FormularioApertura'
 import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
-// compras
 import Vista from "../components/compras/formaspago/Vista";
 // Informes
 import Informe_Orden_Trabajo from '../views/informes/orden_trabajo/Orden_Trabajo'
