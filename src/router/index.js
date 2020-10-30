@@ -24,6 +24,8 @@ import Vista from "../components/compras/formaspago/Vista";
 // Informes
 import Informe_Orden_Trabajo from '../views/informes/orden_trabajo/Orden_Trabajo'
 import Filtro_orden from '../views/informes/orden_trabajo/Filtro_orden'
+import Lista_Orden from '../views/informes/orden_trabajo/Lista_Orden'
+
 Vue.use(Router);
 
 
@@ -144,6 +146,14 @@ var router = new Router({
       path: '/filtro_orden',
       name:'Filtro_orden',
       component: Filtro_orden,
+      meta:{
+        administrador: true
+      }
+    },
+    {
+      path: '/lista_Orden',
+      name: 'Lista_Orden',
+      component: Lista_Orden,
       meta:{
         administrador: true
       }

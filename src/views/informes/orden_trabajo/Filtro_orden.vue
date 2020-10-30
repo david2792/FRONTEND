@@ -155,22 +155,6 @@ export default {
   },
   methods: {
     filtrarDatos() {
-      let header = { "auth-token": this.$store.state.token };
-      let configracion = { headers: header };
-      this.$store
-        .dispatch("setData", configracion)
-        .then(() => {
-          // if (this.informe_ot.cabecera.o_cabecera) {
-          this.$router.push({ path: "/informe_orden_trabajo" });
-          // } else {
-          //   console.log("No existen datos disponibles")
-          // }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    mostrartodo() {
       this.setCabecera();
       console.log("Mostrar todo");
       let header = { "auth-token": this.$store.state.token };
@@ -181,6 +165,9 @@ export default {
       }).catch((err) => {
         console.log(err)
       });
+    },
+    mostrartodo() {
+      this.$router.push({name: "Lista_Orden"})
     },
     estadoorden() {
       console.log(this.informe_ot.estadoorden);

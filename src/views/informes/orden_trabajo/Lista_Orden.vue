@@ -1,3 +1,77 @@
 <template>
-    
+  <v-card>
+    <v-card-title>
+      Orden de trabajo
+      <v-spacer></v-spacer>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field>
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="informe_ot.listall"
+      :search="search"
+    >
+    <template v-slot:[`item.history`]="{ item }">
+        <v-btn 
+        @click="showHistory(item)" 
+        color="green darken-4"
+        dark
+        class="mb-2"
+        >Ver Historial</v-btn>
+      </template>
+    </v-data-table>
+  </v-card>
 </template>
+<script>
+import { mapState } from 'vuex';
+export default {
+  data() {
+    return {
+      search: "",
+      headers: [
+        {
+          text: "Cliente",
+          value: "RazonSocial",
+        },
+        {
+          text: "N° de chapa",
+          value: "numerochapa",
+        },
+
+        {
+          text: "Km recepción",
+          value: "kmrecepcion",
+        },
+
+        {
+          text: "Fecha",
+          value: "fechaemision",
+        },
+        {
+          text: "Historial",
+          value: "history",
+        },
+      ],
+    };
+  },
+  mounted() {
+    let header = { "auth-token": this.$store.state.token };
+    let configracion = { headers: header };
+    this.$store.dispatch("getall", configracion);
+  },
+  computed: {
+    ...mapState(["informe_ot"]),
+  },
+
+  methods:{
+    showHistory(item){
+      console.log("Realizar consultas: ", item)
+    }
+  }
+};
+</script>
