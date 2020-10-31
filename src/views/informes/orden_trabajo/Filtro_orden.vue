@@ -161,7 +161,7 @@ export default {
       let configracion = { headers: header };
       console.log(configracion);
       this.$store.dispatch("getDetalleOrdenTrabajo", configracion).then(() => {
-        this.$router.push({ path: "/informe_orden_trabajo" });
+      this.$router.push({ path: "/informe_orden_trabajo" });
       }).catch((err) => {
         console.log(err)
       });

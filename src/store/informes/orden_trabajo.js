@@ -9,6 +9,9 @@ export const state = {
   estadoorden: "1",
   detalleOrdenTrabajo: [],
   listall: [],
+  isdetalle: false,
+  // unique_detail: [],
+  numero: "",
 };
 export const mutations = {
   SET_CABECERA(state, cabecera) {
@@ -21,9 +24,14 @@ export const mutations = {
   SET_DETALLE_ORDEN_TRABAJO(state, detalle_orden) {
     state.detalleOrdenTrabajo = detalle_orden;
   },
-  SET_ALL_ORDEN(state, listall){
-      state.listall = listall
-  }
+  SET_ALL_ORDEN(state, listall) {
+    state.listall = listall;
+  },
+
+  // SET_UNIQUE_DETAIL(state, unique_detail) {
+  //   console.log("Unique detail: ", unique_detail)
+  //   state.unique_detail = unique_detail;
+  // },
 };
 export const actions = {
   setData({ commit }, configuracion) {
@@ -80,20 +88,28 @@ export const actions = {
       )
       .then((result) => {
         console.log(result.data);
-        commit("SET_DETALLE_ORDEN_TRABAJO", result.data);
+        if (state.isdetalle) {
+          console.log("obteniendo detalle");
+          const detail = result.data.filter( detalle => detalle.numero === state.numero);
+          commit("SET_DETALLE_ORDEN_TRABAJO", detail);
+        } else {
+          console.log("Obteniendo historial");
+          commit("SET_DETALLE_ORDEN_TRABAJO", result.data);
+        }
       })
       .catch((err) => {
         console(err);
       });
   },
 
-  getall({commit}, configuracion){
-      axios
-        .get("orden/listall", configuracion)
-        .then((result) => {
-            commit("SET_ALL_ORDEN", result.data)
-        }).catch((err) => {
-            console.log(err)
-        });
-  }
+  getall({ commit }, configuracion) {
+    axios
+      .get("orden/listall", configuracion)
+      .then((result) => {
+        commit("SET_ALL_ORDEN", result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };

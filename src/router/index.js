@@ -21,6 +21,7 @@ import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
 
 // compras
 import Vista from "../components/compras/formaspago/Vista";
+import VistaCompras from '../components/compras/vistacompras/VistaCompras'
 // Informes
 import Informe_Orden_Trabajo from '../views/informes/orden_trabajo/Orden_Trabajo'
 import Filtro_orden from '../views/informes/orden_trabajo/Filtro_orden'
@@ -132,6 +133,14 @@ var router = new Router({
       meta: {
         administrador: true,
       },
+    },
+    {
+      path: '/vistacompras',
+      name: 'vistacompras',
+      component: VistaCompras,
+      meta:{
+        administrador: true
+      }
     },
     // informes
     {

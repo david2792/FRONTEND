@@ -16,19 +16,20 @@
       :items="informe_ot.listall"
       :search="search"
     >
-    <template v-slot:[`item.history`]="{ item }">
-        <v-btn 
-        @click="showHistory(item)" 
-        color="green darken-4"
-        dark
-        class="mb-2"
-        >Ver Historial</v-btn>
+      <template v-slot:[`item.history`]="{ item }">
+        <v-btn
+          @click="showHistory(item)"
+          color="green darken-4"
+          dark
+          class="mb-2"
+          >Ver Detalle</v-btn
+        >
       </template>
     </v-data-table>
   </v-card>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -68,10 +69,26 @@ export default {
     ...mapState(["informe_ot"]),
   },
 
-  methods:{
-    showHistory(item){
-      console.log("Realizar consultas: ", item)
-    }
-  }
+  methods: {
+    showHistory(item) {
+      this.informe_ot.isdetalle = true;
+      this.informe_ot.estadoorden = "3";
+      this.informe_ot.numerochapa = item.numerochapa;
+      this.informe_ot.numero = item.numero;
+      this.informe_ot.cabecera = item;
+      console.log("Realizar consultas: ", item);
+      let header = { "auth-token": this.$store.state.token };
+      let configracion = { headers: header };
+      console.log(configracion);
+      this.$store
+        .dispatch("getDetalleOrdenTrabajo", configracion)
+        .then(() => {
+          this.$router.push({ path: "/informe_orden_trabajo" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>

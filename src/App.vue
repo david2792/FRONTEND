@@ -136,7 +136,7 @@
               <v-list-item-title><h3>Compras</h3></v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item link>
+          <v-list-item link :to="{name: 'vistacompras'}">
             <v-list-item-title>Compras</v-list-item-title>
             <v-list-item-icon>
               <v-icon></v-icon>
