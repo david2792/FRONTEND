@@ -63,13 +63,16 @@
               show-expand
               single-expand
             >
+              <template v-slot:[`item.data-table-expand`]="{ expand, isExpanded }">
+                <v-icon @click="expand(!isExpanded)">gavel</v-icon>
+              </template>
               <template v-slot:expanded-item="{ headers, item }">
                 <td :colspan="headers.length">
                   <div class="row sp-details">
                     <div tile>
-                        OBSERVACIÓN: &nbsp;&nbsp;&nbsp; {{item.observacion}}
+                      OBSERVACIÓN: &nbsp;&nbsp;&nbsp; {{ item.observacion }}
                     </div>
-                </div>
+                  </div>
                 </td>
               </template>
             </v-data-table>

@@ -1,31 +1,34 @@
 <template>
   <v-card>
-    <v-card-title>
-      Orden de trabajo
-      <v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="informe_ot.listall"
-      :search="search"
-    >
-      <template v-slot:[`item.history`]="{ item }">
-        <v-btn
-          @click="showHistory(item)"
-          color="green darken-4"
-          dark
-          class="mb-2"
-          >Ver Detalle</v-btn
-        >
-      </template>
-    </v-data-table>
+    <div id="print-data">
+      <v-card-title>
+        Orden de trabajo
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table
+        :headers="headers"
+        :items="informe_ot.listall"
+        :search="search"
+        hide-default-footer
+      >
+        <template v-slot:[`item.history`]="{ item }">
+          <v-icon @click="showHistory(item)" dark class="mb-2">gavel</v-icon>
+        </template>
+      </v-data-table>
+    </div>
+    <v-spacer></v-spacer>
+    <br>
+    <br>
+    <v-card>
+      <v-btn @click="printData">Pint data</v-btn>
+    </v-card>
   </v-card>
 </template>
 <script>
@@ -54,7 +57,7 @@ export default {
           value: "fechaemision",
         },
         {
-          text: "Historial",
+          text: "Ver detalle",
           value: "history",
         },
       ],
@@ -88,6 +91,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    printData() {
+      this.$htmlToPaper("print-data");
     },
   },
 };
