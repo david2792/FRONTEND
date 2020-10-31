@@ -81,6 +81,8 @@
         </v-layout>
       </div>
     </div>
+    <br>
+    <br>
     <v-btn @click="printData">Pint data</v-btn>
   </v-card>
 </template>
