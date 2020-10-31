@@ -34,6 +34,9 @@ export const state = {
         total:'',
         datosDetalle:[]
     },
+    DatosOrden:{
+        numero:''
+    },
 //   datos de apertura
         numeroApertura:"",
         caja:"",
@@ -44,6 +47,7 @@ export const state = {
         CodigoSucursal:"",
         NumeroTimbrado:"",
 // fin datos empresa
+   // numero:'',
     codigo:"",
     datosApertura:[],
     detalleFactura:[],
@@ -63,6 +67,12 @@ export const mutations = {
     SET_MENSAJE(state, mensaje){
         //  console.log(producto);
           state.mensaje = mensaje;
+      },
+      SET_DETALLE_ORDEN(state, orden)
+      {
+        console.log("Somos la factura")
+        console.log(orden);
+        state.DetalleCabecera.datosDetalle = orden;
       },
     GET_APERTURA(state, value){
         console.log("Muttations: ", value)
@@ -112,11 +122,12 @@ export const actions = {
     guardarFactura({ commit }, configuracion) {
         console.log(configuracion);
             console.log("Guardar", state.Cabecera)
-            console.log("Guardar", state.DetalleCabecera)
+            console.log("orden", state.DatosOrden)
             let setCabecera = state.Cabecera;
             let setDetalle = state.DetalleCabecera;  
+            let setOrden = state.DatosOrden;
             axios
-                .post('facturacion/guardar', { cabeceras: setCabecera, detalles:setDetalle }, configuracion)
+                .post('facturacion/guardar', { cabeceras: setCabecera, detalles:setDetalle, orden:setOrden }, configuracion)
                 .then(result =>{
                  commit("SET_FACTURA",result);
                     state.mensaje="Registro Guardado"
@@ -124,6 +135,17 @@ export const actions = {
                     console.log("Error: "+error);
                 });
             state.editar_item = !state.editar_item;
+    },
+
+    CapturarOrdenTrabajo({ commit }, configuracion)
+    {
+       // console.log(state.Cabecera.CodigoTiposDocumento);
+        axios
+        .get(`orden/update/${state.DatosOrden.numero}`, configuracion)
+            .then(orden => orden.data)
+            .then(orden => {
+                commit("SET_DETALLE_ORDEN", orden);
+            });
     },
 
     getProducto({commit}, item){

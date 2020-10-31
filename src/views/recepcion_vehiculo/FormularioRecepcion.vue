@@ -21,8 +21,8 @@
             ></v-autocomplete>  
           </v-flex>
            <v-flex xs2 sm2 md4 lg4 xl4>
-               <v-btn  class="ma-2" color="pink" dark @click="abrirBusqueda()">Buscar
-                <v-icon dark right>search</v-icon>
+               <v-btn  class="ma-2" color="pink"  @click="abrirBusqueda()">Buscar
+                <v-icon  right>search</v-icon>
             </v-btn>
            </v-flex>
             <v-flex xs12 sm12 md4 lg4 xl4>
@@ -195,8 +195,8 @@ export default {
     },
     abrirBusqueda()
     {
-      this.$store.dispatch("getBuscador")
-      this.busqueda=true
+    this.$store.dispatch("getBuscadorRecepcion", this.token_configuration)
+    this.busqueda=true
     },
     cerrarBusqueda()
     {

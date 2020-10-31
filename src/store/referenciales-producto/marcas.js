@@ -7,9 +7,9 @@ export const state = {
 };
 
 export const mutations = {
-    SET_MARCA(state, Marcas){
-        console.log(Marcas);
-        state.Marcas = Marcas;
+    SET_MARCA(state, marca){
+        console.log(marca);
+        state.Marcas = marca;
     },
     SET_AUX(state, Aux){
         console.log(Aux);
@@ -18,7 +18,7 @@ export const mutations = {
 };
 
 export const actions = {
-    getMarcas({commit}, configuracion){
+    getMarcasProductos({commit}, configuracion){
         console.log(configuracion);
         axios
             .get('marcas', configuracion)

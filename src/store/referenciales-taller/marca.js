@@ -7,7 +7,7 @@ export const state = {
 };
 
 export const mutations = {
-    SET_MARCA(state, marca){
+    SET_MARCA_VEHICULO(state, marca){
         console.log(marca);
         state.marcas = marca;
     },
@@ -25,7 +25,7 @@ export const actions = {
             .then(marca => marca.data)
             .then(marca => {
               console.log(" "+marca)
-               commit("SET_MARCA", marca);
+               commit("SET_MARCA_VEHICULO", marca);
                 // let auxiliar=[ciudad]
                 // console.log(auxiliar)
                 // commit("SET_AUX", auxiliar);

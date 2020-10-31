@@ -41,6 +41,7 @@
         <template v-slot:items>
             <td >{{ props.item.numero }}</td>
           <td>{{ props.item.numerochapa }}</td>
+           <td>{{ props.item.CodigoCliente }}</td>
           <td>{{ props.item.RazonSocial }}</td>
           <td>{{ props.item.observacionorden }}</td>
           <td>{{ props.item.observacionrecepcion }}</td>
@@ -68,6 +69,7 @@ export default {
           { text: 'Opciones', value: 'opcion', sortable: false,class: "cabecera colorCabecera--text" },
         { text: 'Nro', value: 'numero', sortable: true, class: "cabecera colorCabecera--text" },
         { text: 'CHAPA  ', value: 'numerochapa', sortable: true,class: "cabecera colorCabecera--text",},
+          { text: 'CodigoCliente  ', value: 'CodigoCliente', sortable: true, align: ' d-none'},
         { text: 'CLIENTE', value: 'RazonSocial', sortable: true,class: "cabecera colorCabecera--text" },
         { text: 'OBSERVACION ORDEN', value: 'observacionorden', sortable: false,class: "cabecera colorCabecera--text"  },
         { text: 'OBSERVACION RECEPCION', value: 'observacionrecepcion', sortable: false,class: "cabecera colorCabecera--text"  },
@@ -111,7 +113,10 @@ export default {
     this.$router.push({
             name: "facturacion",
             params: {
-              numero: item.numero
+              numero: item.numero,
+              RazonSocial:item.RazonSocial,
+              CodigoCliente:item.CodigoCliente
+
             }
           });
     },

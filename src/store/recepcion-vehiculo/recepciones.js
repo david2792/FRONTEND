@@ -41,9 +41,9 @@ export const mutations = {
         console.log(recepcion);
         state.recepciones = recepcion;
     },
-    SET_BUSCADOR(state,resultado){
+    SET_BUSCADOR_VEHICULO(state,resultado){
         console.log(resultado)
-        state.aux=resultado
+        state.aux=resultado;
     },
     GET_RECEPCION(state, value){
         console.log("Muttations: ", value)
@@ -58,14 +58,13 @@ export const mutations = {
 };
 
 export const actions = {
-    getBuscador({commit}, configuracion){
+    getBuscadorRecepcion({commit}, configuracion){
         console.log(state.Recepcion.codigocliente);
         axios
             .get(`rvehiculo/list/${state.Recepcion.codigocliente}`, configuracion)
             .then(result =>{
-                console.log(result.data)  
-             //  state.aux=result.data  
-               commit("SET_BUSCADOR", result.data); 
+                console.log("hola "+result)   
+               commit("SET_BUSCADOR_VEHICULO", result.data); 
             }).catch(error=>{
                 console.log("Error: "+error);
             });

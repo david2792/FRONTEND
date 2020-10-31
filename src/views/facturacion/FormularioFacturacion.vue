@@ -98,7 +98,7 @@
          </v-col>
           <v-col class=" pt-0 mt-0" cols="12" sm="2" md="2" >
            <v-text-field
-           v-model="numero"
+           v-model="vFacturacion.DatosOrden.numero"
             outlined  
             dense
             label="Nro Orden de Trabajo"
@@ -270,7 +270,7 @@
          <v-btn color="red " outlined large @click="guardar()" >GUARDAR<v-icon>save</v-icon></v-btn>
         </v-col>
         <v-col cols="6" sm="6" md="2"  >
-         <v-btn color="succes " outlined large  @click="cancelar()" >CANCELAR<v-icon>not_interested</v-icon></v-btn>
+         <v-btn color="succes " outlined large  @click="cancelarTodo()" >CANCELAR<v-icon>not_interested</v-icon></v-btn>
         </v-col>
         <v-col cols=6 sm="6" md="12" v-if="notificacion==1">
             <v-alert 
@@ -447,7 +447,7 @@ import { mapGetters, mapState } from "vuex";
 export default {
   data() {
     return {
-      numero:'',
+//numero:'',
       // detalle de clientes
 
       razonsocial:'',
@@ -513,7 +513,21 @@ export default {
       this.$store.state.vFacturacion.Cabecera.CodigoTiposDocumento=2
       this.$store.dispatch("getNumeroTimbrado", this.token_configuration);
       this.CargarCliente();
-      this.numero = this.$route.params.numero;
+      this.$store.state.vFacturacion.DatosOrden.numero = this.$route.params.numero;
+      console.log(this.$route.params.numero)
+      if(this.$route.params.numero != null)
+      {
+      this.$store.dispatch("CapturarOrdenTrabajo", this.token_configuration);
+      this.razonsocial = this.$route.params.RazonSocial;
+      this.$store.state.vFacturacion.Cabecera.CodigoCliente = this.$route.params.CodigoCliente;
+      }
+      
+    
+     // 
+  this.cargarDatosOrden()
+      
+      
+
   },
   computed: {
     ...mapState(["vFacturacion","vCondicion","vDocumento","vCliente","vProducto"]),
@@ -660,7 +674,20 @@ export default {
       this.limpiarCobro()
       this.dialogocobro=false
     },
-    
+    cancelarTodo()
+    {
+      this.CargarCliente();
+      this.vFacturacion.DatosOrden.numero=''
+      this.limpiarDatosProductos()
+      this.limpiarCobro()
+     // this.dialogocobro=false
+    },
+    cargarDatosOrden()
+    {
+        //this.razonsocial =  this.vFacturacion.DetalleCabecera.datosDetalle[0].RazonSocial
+       //  this.$store.state.vFacturacion.DetalleCabecera.datosDetalle[0].codigocliente
+    },
+
     agregarDatosTabla()
     {
       let bandera=0
