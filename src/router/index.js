@@ -19,9 +19,12 @@ import prueba from '../views/orden_trabajo/prueba'
 import FormularioApertura from '../views/apertura_caja/FormularioApertura'
 import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
 import Vista from "../components/compras/formaspago/Vista";
+import VistaCompras from '../components/compras/vistacompras/VistaCompras'
 // Informes
 import Informe_Orden_Trabajo from '../views/informes/orden_trabajo/Orden_Trabajo'
 import Filtro_orden from '../views/informes/orden_trabajo/Filtro_orden'
+import Lista_Orden from '../views/informes/orden_trabajo/Lista_Orden'
+
 Vue.use(Router);
 var router = new Router({
   mode: "history",
@@ -127,6 +130,14 @@ var router = new Router({
         administrador: true,
       },
     },
+    {
+      path: '/vistacompras',
+      name: 'vistacompras',
+      component: VistaCompras,
+      meta:{
+        administrador: true
+      }
+    },
     // informes
     {
       path: '/informe_orden_trabajo',
@@ -140,6 +151,14 @@ var router = new Router({
       path: '/filtro_orden',
       name:'Filtro_orden',
       component: Filtro_orden,
+      meta:{
+        administrador: true
+      }
+    },
+    {
+      path: '/lista_Orden',
+      name: 'Lista_Orden',
+      component: Lista_Orden,
       meta:{
         administrador: true
       }

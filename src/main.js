@@ -18,6 +18,8 @@ const options = {
   ],
   styles: [
     'https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css',
+    "https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css",
+    "https://fonts.googleapis.com/css?family=Material+Icons"
   ]
 }
 
