@@ -5,7 +5,10 @@
       <v-layout wrap>
         <v-flex xs12 sm12 md12>
           <v-autocomplete
+<<<<<<< HEAD
 
+=======
+>>>>>>> 71ba06f88a644c906b3a02fd04e54a7acad1e9e6
             autofocus
             v-model="informe_ot.numerochapa"
             :items="informe_ot.orden_done"
@@ -23,19 +26,19 @@
               color="red"
               @click="estadoorden"
               label="Pendientes"
-              value= "1"
+              value="1"
             ></v-radio>
             <v-radio
               color="success"
               @click="estadoorden"
               label="Completados"
-              value= "2"
+              value="2"
             ></v-radio>
             <v-radio
               color="primary"
               @click="estadoorden"
               label="Ambos"
-              value= "3"
+              value="3"
             ></v-radio>
           </v-radio-group>
         </v-flex>
@@ -161,14 +164,17 @@ export default {
       let header = { "auth-token": this.$store.state.token };
       let configracion = { headers: header };
       console.log(configracion);
-      this.$store.dispatch("getDetalleOrdenTrabajo", configracion).then(() => {
-      this.$router.push({ path: "/informe_orden_trabajo" });
-      }).catch((err) => {
-        console.log(err)
-      });
+      this.$store
+        .dispatch("getDetalleOrdenTrabajo", configracion)
+        .then(() => {
+          this.$router.push({ path: "/informe_orden_trabajo" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     mostrartodo() {
-      this.$router.push({name: "Lista_Orden"})
+      this.$router.push({ name: "Lista_Orden" });
     },
     estadoorden() {
       console.log(this.informe_ot.estadoorden);
@@ -179,11 +185,13 @@ export default {
       }
     },
 
-    setCabecera(){
+    setCabecera() {
       console.log(this.informe_ot.numerochapa);
-      this.informe_ot.cabecera = this.informe_ot.orden_done.find(element => element.numerochapa = this.informe_ot.numerochapa);
+      this.informe_ot.cabecera = this.informe_ot.orden_done.find(
+        (element) => (element.numerochapa = this.informe_ot.numerochapa)
+      );
       console.log(this.informe_ot.cabecera);
-    }
+    },
   },
 };
 </script>

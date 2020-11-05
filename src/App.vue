@@ -142,8 +142,8 @@
               <v-icon></v-icon>
             </v-list-item-icon>
           </v-list-item>
-          <v-list-item link>
-            <v-list-item-title>Pedidos</v-list-item-title>
+          <v-list-item link :to="{name: 'VistaProveedor'}">
+            <v-list-item-title>Proveedor</v-list-item-title>
             <v-list-item-icon>
               <v-icon></v-icon>
             </v-list-item-icon>
