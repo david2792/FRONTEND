@@ -37,7 +37,7 @@
           >
                <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
             <center><v-icon size="80">departure_board</v-icon></center>
-             <v-btn color="#BF36" tile  block >
+             <v-btn color="#BF36" tile  block :to="{name: 'ordenformulario'}" >
             <v-icon size="" left></v-icon>Orden Trabajo
             </v-btn>
        
@@ -99,6 +99,69 @@
             <center><v-icon size="80">local_taxi</v-icon></center>
              <v-btn color="#BF36" tile  block  :to="{name: 'vehiculo'}">
             <v-icon size="30" left></v-icon>Vehiculos
+            </v-btn>
+       
+      </v-card>
+      </v-flex>
+      <!--  -->
+        <!--  -->
+       <v-flex  xs12 sm12 md12 lg2 xl2  class="pt-2">
+       <v-card
+           color="indigo accent-4"
+            dark
+           class="mr-1"
+          >
+               <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
+            <center><v-icon size="80">add_business</v-icon></center>
+             <v-btn color="#BF36" tile  block  :to="{name: 'aperturacaja'}">
+            <v-icon size="30" left></v-icon>Apertura
+            </v-btn>
+       
+      </v-card>
+      </v-flex>
+      <!--  -->
+       <v-flex  xs12 sm12 md12 lg2 xl2 class="pt-2">
+       <v-card
+           color="indigo accent-4"
+            dark
+           class="mr-1 "
+          >
+               <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
+            <center><v-icon size="80">add_shopping_cart</v-icon></center>
+             <v-btn color="#BF36" tile  block  :to="{name: 'facturacion'}">
+            <v-icon size="30" left></v-icon>Facturacion
+            </v-btn>
+       
+      </v-card>
+      </v-flex>
+      <!--  -->
+       <!--  -->
+       <v-flex  xs12 sm12 md12 lg2 xl2  class="pt-2">
+       <v-card
+           color="indigo accent-4"
+            dark
+           class="mr-1 "
+          >
+               <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
+            <center><v-icon size="80">attach_money</v-icon></center>
+             <v-btn color="#BF36" tile  block  :to="{name: 'vehiculo'}">
+            <v-icon size="30" left></v-icon>Arqueo
+            </v-btn>
+       
+      </v-card>
+      </v-flex>
+      <!--  -->
+       <!--  -->
+       <v-flex  xs12 sm12 md12 lg2 xl2  class="pt-2">
+       <v-card
+           color="indigo accent-4"
+            dark
+           class="mr-1 "
+          >
+               <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
+            <center><v-icon size="80">content_paste</v-icon></center>
+             <v-btn color="#BF36" tile  block  :to="{name: 'Filtro_orden'}">
+            <v-icon size="30" left></v-icon>Informe Orden
             </v-btn>
        
       </v-card>

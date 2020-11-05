@@ -17,28 +17,31 @@
       <template v-slot:[`item.opcion`]="{ item }">
        <v-btn
         class="mx-2"
-        fab
+        
         dark
         small
         color="purple darken-4"
          @click="editItem(item)"
               >
         <v-icon dark>add</v-icon>
+        Facturar
         </v-btn>
                <v-btn
         class="mx-2"
-        fab
+        
         dark
         small
         color="pink darken-4"
          @click="editItem(item)"
               >
+              Anular
         <v-icon dark>edit</v-icon>
         </v-btn>
       </template>
         <template v-slot:items>
             <td >{{ props.item.numero }}</td>
           <td>{{ props.item.numerochapa }}</td>
+           <td>{{ props.item.CodigoCliente }}</td>
           <td>{{ props.item.RazonSocial }}</td>
           <td>{{ props.item.observacionorden }}</td>
           <td>{{ props.item.observacionrecepcion }}</td>
@@ -66,6 +69,7 @@ export default {
           { text: 'Opciones', value: 'opcion', sortable: false,class: "cabecera colorCabecera--text" },
         { text: 'Nro', value: 'numero', sortable: true, class: "cabecera colorCabecera--text" },
         { text: 'CHAPA  ', value: 'numerochapa', sortable: true,class: "cabecera colorCabecera--text",},
+          { text: 'CodigoCliente  ', value: 'CodigoCliente', sortable: true, align: ' d-none'},
         { text: 'CLIENTE', value: 'RazonSocial', sortable: true,class: "cabecera colorCabecera--text" },
         { text: 'OBSERVACION ORDEN', value: 'observacionorden', sortable: false,class: "cabecera colorCabecera--text"  },
         { text: 'OBSERVACION RECEPCION', value: 'observacionrecepcion', sortable: false,class: "cabecera colorCabecera--text"  },
@@ -105,9 +109,16 @@ export default {
 
         },
      editItem(item) {
-     this.modal = !this.modal;
-     this.$store.state.vOrden.editar_item = true;
-     this.$store.dispatch("getActualizar",this.token_configuration);  
+ 
+    this.$router.push({
+            name: "facturacion",
+            params: {
+              numero: item.numero,
+              RazonSocial:item.RazonSocial,
+              CodigoCliente:item.CodigoCliente
+
+            }
+          });
     },
     }
 }

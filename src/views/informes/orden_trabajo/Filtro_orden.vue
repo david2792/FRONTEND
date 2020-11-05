@@ -5,6 +5,16 @@
       <v-layout wrap>
         <v-flex xs12 sm12 md12>
           <v-autocomplete
+<<<<<<< HEAD
+          autofocus
+          v-model="informe_ot.numerochapa"
+          :items="informe_ot.orden_done"
+          :item-text="(item) => `${item.RazonSocial} - ${item.numerochapa}`"
+          item-value="numerochapa"
+        
+          >
+          </v-autocomplete>
+=======
             autofocus
             v-model="informe_ot.numerochapa"
             :items="informe_ot.orden_done"
@@ -13,6 +23,7 @@
             label="Buscar por número de chapa/nombre del cliente"
             :rules="clienteRules"
           ></v-autocomplete>
+>>>>>>> b6a37e4a4c0f6ad0a8b41c9884ca52361050196e
         </v-flex>
         <!-- Opción de filtrado -->
         <v-spacer></v-spacer>

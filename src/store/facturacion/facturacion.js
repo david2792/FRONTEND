@@ -34,6 +34,9 @@ export const state = {
         total:'',
         datosDetalle:[]
     },
+    DatosOrden:{
+        numero:''
+    },
 //   datos de apertura
         numeroApertura:"",
         caja:"",
@@ -44,6 +47,7 @@ export const state = {
         CodigoSucursal:"",
         NumeroTimbrado:"",
 // fin datos empresa
+   // numero:'',
     codigo:"",
     datosApertura:[],
     detalleFactura:[],
@@ -56,10 +60,20 @@ export const state = {
 };
 
 export const mutations = {
-    SET_FACTUTA(state, producto){
-      //  console.log(producto);
-        state.productos = producto;
+    SET_FACTUTA(state, facturacion){
+      console.log(facturacion);
+        state.facturaciones = facturacion;
     },
+    SET_MENSAJE(state, mensaje){
+        //  console.log(producto);
+          state.mensaje = mensaje;
+      },
+      SET_DETALLE_ORDEN(state, orden)
+      {
+        console.log("Somos la factura")
+        console.log(orden);
+        state.DetalleCabecera.datosDetalle = orden;
+      },
     GET_APERTURA(state, value){
         console.log("Muttations: ", value)
         state.Producto = value;
@@ -108,18 +122,30 @@ export const actions = {
     guardarFactura({ commit }, configuracion) {
         console.log(configuracion);
             console.log("Guardar", state.Cabecera)
-            console.log("Guardar", state.DetalleCabecera)
+            console.log("orden", state.DatosOrden)
             let setCabecera = state.Cabecera;
             let setDetalle = state.DetalleCabecera;  
+            let setOrden = state.DatosOrden;
             axios
-                .post('facturacion/guardar', { cabeceras: setCabecera, detalles:setDetalle }, configuracion)
+                .post('facturacion/guardar', { cabeceras: setCabecera, detalles:setDetalle, orden:setOrden }, configuracion)
                 .then(result =>{
-                  commit("SET_FACTURA",result);
+                 commit("SET_FACTURA",result);
                     state.mensaje="Registro Guardado"
                 }).catch(error=>{
                     console.log("Error: "+error);
                 });
             state.editar_item = !state.editar_item;
+    },
+
+    CapturarOrdenTrabajo({ commit }, configuracion)
+    {
+       // console.log(state.Cabecera.CodigoTiposDocumento);
+        axios
+        .get(`orden/update/${state.DatosOrden.numero}`, configuracion)
+            .then(orden => orden.data)
+            .then(orden => {
+                commit("SET_DETALLE_ORDEN", orden);
+            });
     },
 
     getProducto({commit}, item){

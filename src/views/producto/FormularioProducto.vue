@@ -146,7 +146,7 @@ export default {
     let header = { "auth-token": this.$store.state.token };
     this.token_configuration = { headers: header };
     this.$store.dispatch("getDepositos", this.token_configuration);
-    this.$store.dispatch("getMarcas", this.token_configuration);
+    this.$store.dispatch("getMarcasProductos", this.token_configuration);
     this.$store.dispatch("getImpuestos", this.token_configuration);
     this.$store.dispatch("getCategorias", this.token_configuration);
     //this.$store.dispatch("getCodigoProducto", this.token_configuration);
