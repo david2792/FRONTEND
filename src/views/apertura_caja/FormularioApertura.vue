@@ -6,7 +6,7 @@
    >
       <v-card-text>
        <v-container grid-list-md>
-        <v-layout align-center justify-center> 
+        <v-layout align-center justify-center v-if="validar_apertura==0"> 
         <v-row>
         <v-col cols="12" sm="12" md="12">
 
@@ -46,8 +46,21 @@ store_mall_directory</v-icon></center></h2>
       {{this.$store.state.vApertura.mensaje}}
     </v-alert>
         </v-col>
-           </v-row>
+         </v-row>
         </v-layout>
+         <!-- validar apertura -->
+        <v-col cols=6 sm="6" md="12" v-if="validar_apertura==1">
+            <v-alert 
+            dismissible
+            color="red"
+            elevation="2"
+            type="error"
+            
+           >
+     El usuario tiene cierre y arqueo pendiente
+    </v-alert>
+        </v-col>
+        <!--  fin validar apertura -->
        </v-container>
       </v-card-text>
     </v-card>
@@ -55,9 +68,11 @@ store_mall_directory</v-icon></center></h2>
 </template>
 <script>
 import { mapGetters, mapState } from "vuex";
+import axios from 'axios';
 export default {
   data() {
     return {
+      validar_apertura:0,
       valid: true,
       mensaje:'',
       notificacion:0,
@@ -70,6 +85,7 @@ export default {
   mounted() {
     let header = { "auth-token": this.$store.state.token };
     this.token_configuration = { headers: header };
+    this.validarApertura()
   },
   computed: {
     ...mapState(["vApertura"]),
@@ -85,6 +101,7 @@ export default {
   },
 
   methods: {
+  
     createFreshProveedor() {
       return {
             Monto:""
@@ -110,9 +127,30 @@ export default {
         .then(this.registroExitoso, this.regitroError);
         console.log("soy el mesaje de guardar ")
         console.log(" voy a guardar")
-      }
-        
+      } 
     },
+     validarApertura()
+     {
+        let me=this;
+      let valor=[];
+      let header={ "auth-token" : this.$store.state.token};
+      let configuracion= {headers : header};
+      let usuarioCajero = this.$store.state.usuario.codigo
+      console.log(usuarioCajero)
+      axios.get(`abrircaja/validar/${usuarioCajero}`,configuracion).then(function (response){
+        valor=response.data;
+        console.log(valor)
+        if (valor.length==0){
+          console.log("sin aperturas")
+        }else{
+            me.validar_apertura= valor[0].estado;
+            console.log(me.validar_apertura)
+        }
+      
+      }).catch(function(error){
+        console.log(error);
+      });
+     },
     registroExitoso(result) {
       console.log("La operación fue correcta:", result);
        this.vApertura.Apertura = this.createFreshProveedor();

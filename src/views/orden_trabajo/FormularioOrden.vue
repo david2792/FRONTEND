@@ -5,7 +5,7 @@
        <v-container grid-list-md>
         <v-layout row wrap> 
            <v-flex xs12 sm12 md12 lg12 xl12>
-            <v-text-field  @click="mostrarModalArticulos()" v-model="vOrden.Orden.observacion"  outlined label="Observaciones de la recepcion ">
+            <v-text-field  @click="mostrarModalArticulos()" v-model="vOrden.observacionRecepcion"  outlined label="Observaciones de la recepcion ">
             </v-text-field>
           </v-flex>
          <template v-if="1==2">
@@ -436,7 +436,7 @@ export default {
        console.log( data.chapa)
         this.vOrden.Orden.numero= data.numero;
         this.vOrden.Orden.chapa=data.chapa;
-        this.vOrden.Orden.observacion=data.observaciones
+        this.vOrden.observacionRecepcion=data.observaciones
         this.codigo='';
       }
       this.close();
@@ -679,7 +679,7 @@ export default {
     },
         registroExitoso(result) {
        this.notificacion=1;
-        this.limpiar()
+        this.limpiarCabecera();   
     },
     regitroError(error) {
       console.log("Hubo un error al realizar la operación", error);
@@ -702,6 +702,7 @@ export default {
     limpiarCabecera(){
       this.vOrden.Orden=this.limpiar()
       this.limpiarDetalle()
+      this.vOrden.observacionRecepcion=''
     },
     limpiarDetalle() {
       return {

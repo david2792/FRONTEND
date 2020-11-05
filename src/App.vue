@@ -239,7 +239,7 @@
       class="text-center"
       cols="12"
     >
-      {{ new Date().getFullYear() }} —@ <span>Desarrollado por Smart Emprendimiento</span>
+      {{ new Date().getFullYear() }} —@ <span>Desarrollado por Smart System</span>
     </v-col>
     </v-footer>
   </v-app>

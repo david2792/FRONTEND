@@ -44,6 +44,9 @@
           <v-btn color="primary" @click="listar()">Resetear</v-btn>
         </template>
       </v-data-table>
+      <v-card-actions>
+        <v-btn color="light-green darken-4" @click="recepcion()">Ir a Recepcion Vehiculo <v-icon>touch_app</v-icon></v-btn>
+      </v-card-actions>
     </v-card>
 </template>
 
@@ -100,6 +103,11 @@ export default {
      this.$store.dispatch("getVehiculo", item);  
      console.log("Hello wey"+ item);
     },
+    recepcion()
+    {
+       this.$router.push({
+            name: "recepcion"});
+    }
   },
 }
 </script>
