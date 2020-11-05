@@ -6,27 +6,30 @@
       :items="compras.listaCompras"
     >
       <!-- <v-responsive class="overflow-y-auto" max-height="calc(90vh - 520px)"> -->
-        <template v-slot:item="{ item }">
-          <tr>
-            <td>{{ item.CodigoProducto }}</td>
-            <td>{{ item.Descripcion }}</td>
-            <td>{{ item.Cantidad }}</td>
-            <td>{{ item.Precio }}</td>
-            <td>{{ (item.subTotal = item.Precio * item.Cantidad) }}</td>
-            <td>
-              <v-btn
-                ><v-btn class="mx-2" fab dark small color="red">
-                  <v-icon dark> mdi-close </v-icon>
-                </v-btn></v-btn
-              >
-            </td>
-          </tr>
-        </template>
+      <template v-slot:item="{ item }">
+        <tr>
+          <td>{{ item.CodigoProducto }}</td>
+          <td>{{ item.Descripcion }}</td>
+          <td>{{ item.Cantidad }}</td>
+          <td>{{ item.Precio }}</td>
+          <td>{{ (item.subTotal = item.Precio * item.Cantidad) }}</td>
+          <td>
+            <v-btn
+              ><v-btn class="mx-2" fab dark small color="red">
+                <v-icon dark> mdi-close </v-icon>
+              </v-btn></v-btn
+            >
+          </td>
+        </tr>
+      </template>
       <!-- </v-responsive> -->
       <template slot="body.append">
         <tr class="pink--text">
           <th class="title">Totals</th>
-          <th class="title">{{ totalCompras }}</th>
+          <th class="title"></th>
+          <th class="title"></th>
+          <th class="title"></th>
+          <th class="title">{{totalCompras}}</th>
         </tr>
       </template>
     </v-data-table>
@@ -54,7 +57,15 @@ export default {
   },
   computed: {
     ...mapState(["compras"]),
-    ...mapGetters(["totalCompras"]),
+    totalCompras() {
+      return this.$store.getters.totalCompras;
+    },
   },
+  methods:{
+    sumField(key) {
+        // sum data in give key (property)
+        return this.compras.listaCompras.reduce((a, b) => a + (b[key] || 0), 0)
+    }
+  }
 };
 </script>

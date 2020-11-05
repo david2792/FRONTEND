@@ -6,9 +6,22 @@
           <!-- Productos -->
           <!-- Agregar Productos -->
           <v-col cols="12" md="1">
-            <v-btn class="mx-2" fab dark color="indigo">
-              <v-icon dark> mdi-plus </v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  class="mx-2"
+                  fab
+                  dark
+                  color="indigo"
+                  @click="modal = !modal"
+                >
+                  <v-icon dark> mdi-plus </v-icon>
+                </v-btn>
+              </template>
+              <span>Agregar nuevo Producto</span>
+            </v-tooltip>
           </v-col>
           <!-- Seleccionar Productos -->
           <v-col cols="12" md="4">
@@ -43,17 +56,35 @@
             ></v-text-field>
           </v-col>
           <v-col cols="12" md="1">
-            <v-btn class="mx-2" fab dark color="green" @click="agregarCompras">
-              <v-icon dark> mdi-cart-check </v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  class="mx-2"
+                  fab
+                  dark
+                  color="green"
+                  @click="agregarCompras"
+                >
+                  <v-icon dark> mdi-cart-check </v-icon>
+                </v-btn>
+              </template>
+              <span>Agregar Compra</span>
+            </v-tooltip>
           </v-col>
         </v-row>
       </v-container>
     </v-form>
+    <!-- Dialogo Producto -->
+    <v-dialog v-model="modal" max-width="1000px">
+      <FormularioProducto />
+    </v-dialog>
   </v-card>
 </template>
 
 <script>
+import FormularioProducto from "../../producto/FormularioProducto";
 import { mapGetters, mapState } from "vuex";
 export default {
   data() {
@@ -66,10 +97,21 @@ export default {
     let configuracion = { headers: header };
     this.$store.dispatch("getProductos", configuracion);
   },
-
+  components: {
+    FormularioProducto,
+  },
   computed: {
     ...mapState(["vProducto", "compras"]),
     ...mapGetters(["addItemToCompras"]),
+
+    modal: {
+      get() {
+        return this.$store.getters.getModal;
+      },
+      set(value) {
+        this.$store.dispatch("switchDialog", value);
+      },
+    },
   },
 
   methods: {
@@ -102,12 +144,17 @@ export default {
       const Precio = parseInt(this.add_Compras.Precio, 10);
       const subTotal = 0;
       this.$store.dispatch("addItemToCompras", {
-        NumeroFactura, 
-        CodigoProducto, 
-        Descripcion, 
-        Cantidad, 
+        NumeroFactura,
+        CodigoProducto,
+        Descripcion,
+        Cantidad,
         Precio,
-        });
+      });
+    },
+
+    close() {
+      this.dialog = false;
+      console.log("paso");
     },
   },
 };

@@ -85,9 +85,21 @@
           <!-- Proveedor -->
           <!-- Agregar Proveedor -->
           <v-col cols="12" md="1">
-            <v-btn color="indigo" fab dark>
-              <v-icon>mdi-account-circle</v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-bind="attrs"
+                  v-on="on"
+                  color="indigo"
+                  fab
+                  dark
+                  @click="modal01 = !modal01"
+                >
+                  <v-icon>mdi-account-circle</v-icon>
+                </v-btn>
+              </template>
+              <span>Agregar nuevo Proveedor</span>
+            </v-tooltip>
           </v-col>
           <!-- Seleccionar proveedor -->
           <v-col cols="12" md="3">
@@ -143,15 +155,23 @@
         </v-row>
       </v-container>
     </v-form>
+    <!-- Dialogo Proveedor -->
+    <v-dialog v-model="modal01" max-width="1000">
+      <FormularioProveedor />
+    </v-dialog>
   </v-card>
 </template>
 <script>
+import FormularioProveedor from "../../proveedor/FormularioProveedor";
 import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
       menu: false,
     };
+  },
+  components: {
+    FormularioProveedor,
   },
   mounted() {
     let header = { "auth-token": this.$store.state.token };
@@ -162,6 +182,14 @@ export default {
   },
   computed: {
     ...mapState(["compras", "vCondicion", "fpagos", "vProveedor"]),
+    modal01: {
+      get() {
+        return this.$store.getters.getModal01;
+      },
+      set(value) {
+        this.$store.dispatch("switchDialog01", value);
+      },
+    },
   },
 
   methods: {
@@ -171,6 +199,10 @@ export default {
       );
       console.log("Proveedor seleccionado: ", proveedor[0].RazonSocial);
       this.vProveedor.Proveedor = proveedor[0];
+    },
+    close() {
+      this.dialog = false;
+      console.log("paso");
     },
   },
 };

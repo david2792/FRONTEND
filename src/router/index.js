@@ -18,8 +18,11 @@ import prueba from '../views/orden_trabajo/prueba'
 // caja
 import FormularioApertura from '../views/apertura_caja/FormularioApertura'
 import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
+
+// Compras
 import Vista from "../components/compras/formaspago/Vista";
 import VistaCompras from '../components/compras/vistacompras/VistaCompras'
+import VistaProveedor from '../views/proveedor/VistaProveedor'
 // Informes
 import Informe_Orden_Trabajo from '../views/informes/orden_trabajo/Orden_Trabajo'
 import Filtro_orden from '../views/informes/orden_trabajo/Filtro_orden'
@@ -135,6 +138,14 @@ var router = new Router({
       name: 'vistacompras',
       component: VistaCompras,
       meta:{
+        administrador: true
+      }
+    },
+    {
+      path: '/vistaProveedor',
+      name: 'VistaProveedor',
+      component: VistaProveedor,
+      meta: {
         administrador: true
       }
     },

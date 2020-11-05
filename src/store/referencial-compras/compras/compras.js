@@ -53,11 +53,10 @@ export const actions= {
 
 export const getters={
     totalCompras: state =>{
-        let total = 0;
-        total = state.listaCompras.forEach(element => {
-            total += parseInt(element.Precio, 10) * parseInt(element.Cantidad, 10);
+        state.cabecera_compras.total = 0;
+        state.listaCompras.forEach(element => {
+            state.cabecera_compras.total += element.Precio * element.Cantidad;
         });
-
-        return total;
+        return state.cabecera_compras.total;
     }
 };
