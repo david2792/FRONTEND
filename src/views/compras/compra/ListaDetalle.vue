@@ -15,7 +15,7 @@
           <td>{{ (item.subTotal = item.Precio * item.Cantidad) }}</td>
           <td>
             <v-btn
-              ><v-btn class="mx-2" fab dark small color="red">
+              ><v-btn class="mx-2" fab dark small color="red" @click="removeItem(item)">
                 <v-icon dark> mdi-close </v-icon>
               </v-btn></v-btn
             >
@@ -62,9 +62,9 @@ export default {
     },
   },
   methods:{
-    sumField(key) {
-        // sum data in give key (property)
-        return this.compras.listaCompras.reduce((a, b) => a + (b[key] || 0), 0)
+    removeItem(item) {
+      console.log(item);
+      this.compras.listaCompras.splice(item, 1);
     }
   }
 };
