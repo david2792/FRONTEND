@@ -117,12 +117,12 @@ export default {
   methods: {
     detalle_compras() {
       return {
-        NumeroFactura: "",
+        NroFactura: "",
         CodigoProducto: "",
         Descripcion: "",
         Cantidad: 1,
         Precio: 0,
-        subtTotal: 0,
+        SubtTotal: 0,
       };
     },
     obtenerProducto(id) {
@@ -137,14 +137,14 @@ export default {
       );
     },
     agregarCompras() {
-      const NumeroFactura = this.compras.cabecera_compras.NumeroFactura;
+      const NroFactura = this.compras.cabecera_compras.NroFactura;
       const CodigoProducto = this.add_Compras.CodigoProducto;
       const Descripcion = this.add_Compras.Descripcion;
       const Cantidad = parseInt(this.add_Compras.Cantidad, 10);
       const Precio = parseInt(this.add_Compras.Precio, 10);
-      const subTotal = 0;
+      const SubTotal = 0;
       this.$store.dispatch("addItemToCompras", {
-        NumeroFactura,
+        NroFactura,
         CodigoProducto,
         Descripcion,
         Cantidad,

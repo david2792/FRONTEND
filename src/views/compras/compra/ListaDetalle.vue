@@ -12,7 +12,7 @@
           <td>{{ item.Descripcion }}</td>
           <td>{{ item.Cantidad }}</td>
           <td>{{ item.Precio }}</td>
-          <td>{{ (item.subTotal = item.Precio * item.Cantidad) }}</td>
+          <td>{{ (item.SubTotal = item.Precio * item.Cantidad) }}</td>
           <td>
             <v-btn
               ><v-btn class="mx-2" fab dark small color="red" @click="removeItem(item)">
@@ -50,7 +50,7 @@ export default {
         { text: "Descripción", value: "Descripcion" },
         { text: "Cantidad", value: "Cantidad" },
         { text: "Precio", value: "Precio" },
-        { text: "Subtotal", value: "subTotal" },
+        { text: "Subtotal", value: "SubTotal" },
         { text: "Opciones", value: "opcion" },
       ],
     };

@@ -68,12 +68,12 @@
           <!-- Forma de pago -->
           <v-col cols="12" md="3">
             <v-autocomplete
-              v-model="compras.cabecera_compras.codigoFormasPagos"
+              v-model="compras.cabecera_compras.CodigoFormasPago"
               :items="fpagos.fpagos"
               :item-text="
                 (item) => `${item.Descripcion} - ${item.CodigoFormasPago}`
               "
-              item-value="numerochapa"
+              item-value="CodigoFormasPago"
               label="Selecionar la forma de pago"
               outlined
               clearable
@@ -179,9 +179,10 @@ export default {
     this.$store.dispatch("getCondicion", configracion);
     this.$store.dispatch("setFormaPagos", configracion);
     this.$store.dispatch("getProveedores", configracion);
+    this.$store.state.compras.cabecera_compras.codigoUsuario = this.$store.state.usuario.codigo;
   },
   computed: {
-    ...mapState(["compras", "vCondicion", "fpagos", "vProveedor"]),
+    ...mapState(["compras", "vCondicion", "fpagos", "vProveedor", "usuario"]),
     modal01: {
       get() {
         return this.$store.getters.getModal01;
