@@ -5,10 +5,6 @@
       <v-layout wrap>
         <v-flex xs12 sm12 md12>
           <v-autocomplete
-<<<<<<< HEAD
-
-=======
->>>>>>> 71ba06f88a644c906b3a02fd04e54a7acad1e9e6
             autofocus
             v-model="informe_ot.numerochapa"
             :items="informe_ot.orden_done"
