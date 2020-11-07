@@ -7,14 +7,14 @@
       <v-card-text>
      <v-container grid-list-md>
                 <v-layout wrap>
-                  <v-flex xs12 sm12 md4>
-                    <v-text-field 
-                    outlined
-                    @keyup="validarCodigoBarra"
-                    v-model="vServicio.Producto.CodigoBarra"  :rules="CodigoRules" label="Codigo de Barra"
-                     ></v-text-field>
-                       <v-alert :value="this.vServicio.show_alert" color="error" icon="warning">El Codigo ya está en uso.</v-alert>
-                  </v-flex>
+                    <!-- <v-flex xs12 sm12 md4>
+                      <v-text-field 
+                      outlined
+                      @keyup="validarCodigoBarra"
+                      v-model="vServicio.Producto.CodigoBarra"  :rules="CodigoRules" label="Codigo de Barra"
+                      ></v-text-field>
+                        <v-alert :value="this.vServicio.show_alert" color="error" icon="warning">El Codigo ya está en uso.</v-alert>
+                    </v-flex> -->
                   <v-flex xs12 sm12 md8>
                     <v-text-field outlined :rules="DescripcionRules" v-model="vServicio.Producto.Descripcion" label="Descripcion"></v-text-field>
                   </v-flex>

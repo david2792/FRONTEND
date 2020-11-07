@@ -6,7 +6,7 @@
    >
       <v-card-text>
        <v-container grid-list-md>
-        <v-layout align-center justify-center> 
+        <v-layout align-center justify-center v-if="vFacturacion.apertura == 1"> 
         <v-row>
         <v-col cols="12" sm="12" md="12">
         <v-alert
@@ -287,6 +287,14 @@
         </v-col>
            </v-row>
         </v-layout>
+        <v-alert v-if="vFacturacion.apertura == 0"
+            dismissible
+            color="red"
+            elevation="2"
+            type="error"  
+           >
+     Realizar Apertura
+    </v-alert>
        </v-container>
       </v-card-text>
     </v-card>
@@ -521,12 +529,6 @@ export default {
       this.razonsocial = this.$route.params.RazonSocial;
       this.$store.state.vFacturacion.Cabecera.CodigoCliente = this.$route.params.CodigoCliente;
       }
-      
-    
-     // 
-  this.cargarDatosOrden()
-      
-      
 
   },
   computed: {

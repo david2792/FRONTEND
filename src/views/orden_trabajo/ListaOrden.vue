@@ -17,25 +17,20 @@
       <template v-slot:[`item.opcion`]="{ item }">
        <v-btn
         class="mx-2"
-        
-        dark
         small
         color="purple darken-4"
          @click="editItem(item)"
               >
-        <v-icon dark>add</v-icon>
+           
         Facturar
         </v-btn>
-               <v-btn
-        class="mx-2"
-        
-        dark
+       <v-btn
+        class="mx-2 mr"
         small
         color="pink darken-4"
          @click="editItem(item)"
               >
               Anular
-        <v-icon dark>edit</v-icon>
         </v-btn>
       </template>
         <template v-slot:items>

@@ -2,7 +2,7 @@
   <v-form v-model="valid" ref="form" lazy-validation>
     <v-card>
       <v-card-title>
-        <span class="headline">Registro Vehiculo</span>
+        <span class="headline">Recepcion de  Vehiculo</span>
       </v-card-title>
       <v-card-text>
      <v-container grid-list-md>

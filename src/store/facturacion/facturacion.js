@@ -55,7 +55,9 @@ export const state = {
     mensaje:'',
     editar_item:false,
     show_alert: false,
-    show_alertE: false
+    show_alertE: false,
+    // validar apertura
+    apertura:0
     
 };
 
@@ -80,10 +82,18 @@ export const mutations = {
     },
     SET_VALIDARAPERTURA(state,apertura)
     {
-       // console.log(apertura)
+       if(apertura.length==0)
+       {
+        console.log("apertura falta")
+        state.apertura=0
+       }else
+       {
         state.numeroApertura=apertura[0].numeroApertura
         state.caja=apertura[0].caja
         state.Cajero=apertura[0].Cajero
+        state.apertura=1
+       }
+ 
     },
     SET_VALIDARTIMBRADO(state,timbrado)
     {

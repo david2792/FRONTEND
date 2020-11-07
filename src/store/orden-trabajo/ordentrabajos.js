@@ -16,6 +16,7 @@ export const state = {
         fechaemision:"",
         detalles:[] 
     },
+    observacionRecepcion:'',
     configuracion: [],
     mensaje:'',
     editar_item:false,

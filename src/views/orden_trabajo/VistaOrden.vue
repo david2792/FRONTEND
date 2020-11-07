@@ -2,7 +2,7 @@
   <v-layout align-start>
     <v-flex>
       <v-toolbar float>
-        <v-toolbar-title>Recepcion Vehiculo</v-toolbar-title>
+        <v-toolbar-title>Orden de Trabajo</v-toolbar-title>
         <v-divider class="mx-2" insert vertical></v-divider>
         <v-spacer></v-spacer>
           <template>

@@ -43,6 +43,9 @@
           <v-btn color="primary" @click="listar()">Resetear</v-btn>
         </template>
       </v-data-table>
+      <v-card-actions>
+        <v-btn color="light-green darken-4" @click="orden()">Ir a Orden de Trabajo <v-icon>touch_app</v-icon></v-btn>
+      </v-card-actions>
     </v-card>
 </template>
 <script>
@@ -102,6 +105,11 @@ export default {
      this.$store.dispatch("getRecepcion", item);  
      console.log("Hello wey"+ item);
     },
+    orden()
+    {
+       this.$router.push({
+       name: "orden"});
+    }
   },
 }
 </script>
