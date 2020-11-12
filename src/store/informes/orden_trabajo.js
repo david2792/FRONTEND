@@ -104,7 +104,7 @@ export const actions = {
 
   getall({ commit }, configuracion) {
     axios
-      .get("orden/listall", configuracion)
+      .post("orden/listall",{numerochapa: state.numerochapa}, configuracion)
       .then((result) => {
         commit("SET_ALL_ORDEN", result.data);
       })

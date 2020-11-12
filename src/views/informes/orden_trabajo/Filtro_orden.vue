@@ -170,7 +170,13 @@ export default {
         });
     },
     mostrartodo() {
-      this.$router.push({ name: "Lista_Orden" });
+      let header = { "auth-token": this.$store.state.token };
+      let configracion = { headers: header };
+      this.$store.dispatch("getall", configracion).then(() => {
+        this.$router.push({ name: "Lista_Orden" });
+      }).catch((err) => {
+        console.log(err)
+      });
     },
     estadoorden() {
       console.log(this.informe_ot.estadoorden);
