@@ -3,9 +3,10 @@ import Vuex from 'vuex';
 import axios from 'axios';
 
 export const state = {
-    aprturas: [],
+    cierres: [],
     Cierre:{
-        NumeroApertura:""        
+        NumeroApertura:"" ,
+        monto:""       
     },
     
     configuracion: [],
@@ -34,15 +35,7 @@ export const mutations = {
 };
 
 export const actions = {
-    getCodigoProducto({commit}, configuracion) {
-        console.log(configuracion);
-        axios
-          .get("productos/codigo",configuracion)
-          .then(CodioProducto => CodioProducto.data)
-            .then(CodioProducto => {
-                commit("GET_CODIGO_PRODUCTO", CodioProducto);
-            });
-      },
+ 
     getApertura({commit}, configuracion){
         console.log(configuracion);
         axios
@@ -68,29 +61,10 @@ export const actions = {
             state.editar_item = !state.editar_item;
     },
 
-    getProducto({commit}, item){
-        console.log("Item recibido", item);
-        commit("GET_PRODUCTO", item);
-    },
-    buscarCodigoBarra({commit}){
-        let producto = state.productos.find(
-            find => find.CodigoBarra === state.Producto.CodigoBarra
-          );
-          // console.log(value);
-          if(producto){
-            console.log("encontrado", state.Producto.CodigoBarra);
-            state.show_alert = true
-            commit('SHOW_ALERT', state.show_alert)
-          }else{
-              console.log("datos validos")
-              state.show_alert = false
-              commit('SHOW_ALERT', state.show_alert)
-          }
-},
 }
 export const getters = {
-    setApertura: (state) => {
-        console.log(state.Apertura.NumeroApertura)
-        return state.aperturas;
+    setArqueo: (state) => {
+        console.log(state.Cierre.NumeroApertura)
+        return state.cierres;
     }
 };

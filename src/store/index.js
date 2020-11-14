@@ -28,6 +28,7 @@ import * as vMecanico from './referenciales-personas/mecanicos.js'
 // caja
 
  import * as vApertura from './referenciales-cajas/abircaja'
+ import * as vArqueo from './referenciales-cajas/arqueocaja'
  import * as vFacturacion from './facturacion/facturacion'
  import * as vCondicion from './facturacion/condicion'
  import * as vDocumento from './facturacion/tipoDocumento'
@@ -64,6 +65,7 @@ export default new Vuex.Store({
     vOrden,
     vMecanico,
     // caja
+    vArqueo,
     vApertura,
     vFacturacion,
     vCondicion,

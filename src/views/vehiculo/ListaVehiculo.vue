@@ -59,7 +59,7 @@ export default {
             token_configuration: [],
       headers: [
          { text: "Opciones", value: "opcion", sortable: false,class:"primary " },
-          { text: "CODIGO ", value: "codigo", sortable: true,class:"primary " },
+          { text: "CODIGO ", value: "codigovehiculo", sortable: true,class:"primary " },
         { text: "CODIGO CLIENTE ", value: "CodigoCliente", sortable: true,class:"primary " },
         { text: "RAZON SOCIAL", value: "RazonSocial", sortable: true,class:"primary " },
         { text: "CHAPA", value: "chapa", sortable: true,class:"primary " },
