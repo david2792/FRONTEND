@@ -235,7 +235,7 @@ export default {
 
   computed: {
       listar() {
-          let rol =this.$store.state.usuario.users;
+          let rol =this.$store.state.usuario.Nombre;
          return rol
          // console.log(idproducto)
         },

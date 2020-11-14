@@ -63,7 +63,7 @@ export const actions = {
         axios
             .get(`rvehiculo/list/${state.Recepcion.codigocliente}`, configuracion)
             .then(result =>{
-                console.log("hola "+result)   
+                console.log(result)   
                commit("SET_BUSCADOR_VEHICULO", result.data); 
             }).catch(error=>{
                 console.log("Error: "+error);

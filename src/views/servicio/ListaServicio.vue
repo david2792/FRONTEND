@@ -51,14 +51,14 @@ export default {
             search: "",
             token_configuration: [],
       headers: [
-         { text: "Opciones", value: "opcion", sortable: false,class:"primary "  },
-        { text: "Codigo", value: "CodigoProducto", sortable: true,class:"primary "  },
-        { text: "C. de Barra", value: "CodigoBarra", sortable: false,class:"primary "  },
-        { text: "Descripcion", value: "Descripcion", sortable: false,class:"primary "  },
-        { text: "Precio Compra", value: "PrecioCompra", sortable: false,class:"primary "  },
-        { text: "Precio Venta",value: "PrecioVentaMinorista",sortable: false,class:"primary "},
+         { text: "Opciones", value: "opcion", sortable: false,class:"primary subtitle-1 text-uppercase "  },
+        { text: "Codigo", value: "CodigoProducto", sortable: false,class:"primary subtitle-1 text-uppercase " },
+        { text: "Barra", value: "CodigoBarra", sortable: false,class:"primary subtitle-1 text-uppercase "  },
+        { text: "Descripcion", value: "Descripcion", sortable: false,class:"primary subtitle-1 text-uppercase "  },
+        { text: "Precio Compra", value: "PrecioCompra", sortable: false,class:"primary subtitle-1 text-uppercase " },
+        { text: "Precio Venta",value: "PrecioVentaMinorista",sortable: false,class:"primary subtitle-1 text-uppercase "},
  
-        { text: "Deposito", value: "Deposito", sortable: false,class:"primary "  }
+        { text: "Deposito", value: "Deposito", sortable: false,class:"primary subtitle-1 text-uppercase "}
         
       ],
         }
@@ -92,6 +92,7 @@ export default {
      this.$store.state.vServicio.editar_item = true;
      this.$store.dispatch("getServicio", item);  
      console.log("Hello wey"+ item);
+     this.$store.state.CodigoProducto=item.CodigoProducto
     },
   },
 }

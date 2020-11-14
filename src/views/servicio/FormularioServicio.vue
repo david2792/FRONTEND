@@ -110,7 +110,7 @@ export default {
   methods: {
    createFreshProveedor() {
       return {
-      CodigoProducto: "",
+        CodigoProducto: "",
         CodigoBarra: "",
         Descripcion: "",
         PrecioCompra: "",
@@ -142,8 +142,10 @@ export default {
             this.$store
         .dispatch("guardarServicio", this.token_configuration)
         .then(this.registroExitoso, this.regitroError);
+          console.log("voy a GUARDAR")
         this.limpiar();
          }else{
+       this.$store.state.vServicio.Producto.CodigoProducto=this.$store.state.CodigoProducto
         this.$store
         .dispatch("guardarServicio", this.token_configuration)
         .then(this.registroExitoso, this.regitroError);

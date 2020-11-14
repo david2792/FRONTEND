@@ -81,8 +81,12 @@ export const actions = {
                 }).catch(error=>{
                     console.log("Error: "+error);
                 });
-            //state.editar_item = !state.editar_item;
-        } else {
+            state.editar_item = false;
+        } 
+    },
+
+    modificarProducto({ commit }, configuracion){
+        if (state.editar_item==true) {
             console.log("Editar", state.Producto);
             let setProducto = state.Producto;
             axios
@@ -94,7 +98,7 @@ export const actions = {
                     console.log("Error: "+error);
                 });
                 console.log("Editar", state.Producto);
-                state.editar_item = !state.editar_item;
+                state.editar_item = false;
           //  state.editar_item = !state.editar_item;
         }
     },
@@ -103,7 +107,7 @@ export const actions = {
         console.log("Item recibido", item);
         commit("GET_PRODUCTO", item);
     },
-    buscarCodigoBarra({commit}){
+    buscarCodigoBarraProducto({commit}){
         let producto = state.productos.find(
             find => find.CodigoBarra === state.Producto.CodigoBarra
           );
