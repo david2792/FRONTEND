@@ -27,6 +27,7 @@ import VistaProveedor from '../views/proveedor/VistaProveedor'
 import Informe_Orden_Trabajo from '../views/informes/orden_trabajo/Orden_Trabajo'
 import Filtro_orden from '../views/informes/orden_trabajo/Filtro_orden'
 import Lista_Orden from '../views/informes/orden_trabajo/Lista_Orden'
+import Impresion_Factura from '../views/facturacion/Impresion_Factura'
 
 Vue.use(Router);
 var router = new Router({
@@ -172,6 +173,14 @@ var router = new Router({
       component: Lista_Orden,
       meta:{
         administrador: true
+      }
+    },
+    {
+      path: "/impresion_factura",
+      name: "Impresion_Factura",
+      component: Impresion_Factura,
+      meta: {
+        administrador : true
       }
     }
   ],

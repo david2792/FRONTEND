@@ -5,6 +5,7 @@ import store from '..';
 
 export const state = {
     facturaciones: [],
+    get_facturacion:[],
     Cabecera:{
         CodigoTiposDocumento:"",
         numeroApertura:"",
@@ -62,9 +63,11 @@ export const state = {
 };
 
 export const mutations = {
-    SET_FACTUTA(state, facturacion){
+    SET_FACTURA(state, facturacion){
       console.log(facturacion);
-        state.facturaciones = facturacion;
+        // state.facturaciones = facturacion;
+        state.get_facturacion = facturacion.cabecera;
+
     },
     SET_MENSAJE(state, mensaje){
         //  console.log(producto);
@@ -139,7 +142,8 @@ export const actions = {
             axios
                 .post('facturacion/guardar', { cabeceras: setCabecera, detalles:setDetalle, orden:setOrden }, configuracion)
                 .then(result =>{
-                 commit("SET_FACTURA",result);
+                    console.log("Retornando datos from factura: ", result.data)
+                 commit("SET_FACTURA",result.data);
                     state.mensaje="Registro Guardado"
                 }).catch(error=>{
                     console.log("Error: "+error);

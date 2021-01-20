@@ -768,16 +768,17 @@ export default {
       this.vFacturacion.Cabecera.CodigoFormasCobro=0; 
       this.$store
         .dispatch("guardarFactura", this.token_configuration)
-        .then(this.registroExitoso,this.regitroError); 
+        .then(this.registroExitoso,this.regitroError);
+        this.$router.push({name:'Impresion_Factura'})
      }
     },
      registroExitoso(result) {
+      
       this.CargarCliente();
       this.notificacion=1
-      this.limpiarDatosProductos()
-      this.limpiarCobro()
+      // this.limpiarDatosProductos()
+      // this.limpiarCobro()
       this.dialogocobro=false
-     
     },
     regitroError(error) {
       console.log("Hubo un error al realizar la operación", error);
