@@ -236,6 +236,7 @@ export default {
       console.log("limpiar");
       //  this.vProducto.CodigoProducto="",
       this.vProducto.Producto = this.createFreshProveedor();
+      this.vProducto.show_alert =false
       this.notificacion = 0;
       this.reset();
     },
@@ -247,12 +248,11 @@ export default {
           this.$store
             .dispatch("guardarProducto", this.token_configuration)
             .then(this.registroExitoso, this.regitroError);
-          console.log("soy el mesaje de guardar ");
           console.log(" voy a guardar");
           this.limpiar();
         } else {
           this.$store
-            .dispatch("guardarProducto", this.token_configuration)
+            .dispatch("modificarProducto", this.token_configuration)
             .then(this.registroExitoso, this.regitroError);
           console.log("voy a modificar");
           this.limpiar();
@@ -271,7 +271,7 @@ export default {
       console.log("Hubo un error al realizar la operación", error);
     },
     validarCodigoBarra() {
-      this.$store.dispatch("buscarCodigoBarra");
+      this.$store.dispatch("buscarCodigoBarraProducto");
     },
   },
   // nuevo codigo

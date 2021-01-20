@@ -144,7 +144,7 @@
           >
                <!-- <v-img   class="white--text align-end" :src="require('../../assets/user.png')" ></v-img> -->
             <center><v-icon size="80">attach_money</v-icon></center>
-             <v-btn color="#BF36" tile  block  :to="{name: 'vehiculo'}">
+             <v-btn color="#BF36" tile  block  :to="{name: 'arqueo'}">
             <v-icon size="30" left></v-icon>Arqueo
             </v-btn>
        
@@ -235,7 +235,7 @@ export default {
 
   computed: {
       listar() {
-          let rol =this.$store.state.usuario.users;
+          let rol =this.$store.state.usuario.Nombre;
          return rol
          // console.log(idproducto)
         },

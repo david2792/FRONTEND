@@ -17,6 +17,7 @@ import prueba from '../views/orden_trabajo/prueba'
 
 // caja
 import FormularioApertura from '../views/apertura_caja/FormularioApertura'
+import FormularioArqueo from '../views/arqueo_cierre/FormularioArqueo'
 import FormularioFacturacion from '../views/facturacion/FormularioFacturacion'
 
 // Compras
@@ -113,6 +114,14 @@ var router = new Router({
       path: '/aperturacajas',
       name: 'aperturacaja',
       component: FormularioApertura,
+      meta: {
+        libre: true
+      }
+    },
+    {
+      path: '/arqueo',
+      name: 'arqueo',
+      component: FormularioArqueo,
       meta: {
         libre: true
       }

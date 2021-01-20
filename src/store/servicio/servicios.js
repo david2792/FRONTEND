@@ -13,7 +13,7 @@ export const state = {
         CodigoDeposito: "",
         
     },
-    CodioProducto:'',
+    CodigoProducto:'',
     configuracion: [],
     mensaje:'',
     editar_item:false,
@@ -56,7 +56,7 @@ export const actions = {
     },
     
     guardarServicio({ commit }, configuracion) {
-        console.log(configuracion);
+        console.log("ESTADO "+state.editar_item);
         if (state.editar_item==false) {
             console.log("Guardar", state.Producto)
             let setProducto = state.Producto;
@@ -68,7 +68,7 @@ export const actions = {
                 }).catch(error=>{
                     console.log("Error: "+error);
                 });
-            //state.editar_item = !state.editar_item;
+       //  state.editar_item = !state.editar_item;
         } else {
             console.log("Editar", state.Producto);
             let setServicio = state.Producto;
@@ -81,8 +81,8 @@ export const actions = {
                     console.log("Error: "+error);
                 });
                 console.log("Editar", state.Producto);
-                state.editar_item = !state.editar_item;
-          //  state.editar_item = !state.editar_item;
+                state.editar_item = false;
+         // state.editar_item = !state.editar_item;
         }
     },
 

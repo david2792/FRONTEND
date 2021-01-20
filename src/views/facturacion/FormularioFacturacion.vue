@@ -11,9 +11,9 @@
         <v-col cols="12" sm="12" md="12">
         <v-alert
         outlined
-           color="blue"
+           color="green accent-1"
             >
-           FACTURACION<v-icon color="blue" style=" font-size: 38px; ">
+           FACTURACION<v-icon color="green accent-1" style=" font-size: 38px; ">
                 local_grocery_store
             </v-icon>
             <span>CAJERO: {{vFacturacion.Cajero}}</span>
@@ -237,6 +237,7 @@
               >
               <template v-slot:[`item.borrar`]="{ item }">
                 <v-btn
+                          outlined
                           class="mx-2"
                           fab
                           dark
@@ -249,12 +250,12 @@
                       
                 </template>
                   <template v-slot:items>
-                  <td class="text-xs-center">{{item.codigoproducto}}</td>
-                  <td class="text-xs-center" v-if="2==3" ></td>
-                 <td class="text-xl-center" >{{item.descripcion}}</td>
-                  <td class="text-xs-center">{{(item.cantidad )}}</td>
-                  <td class="text-xs-center" >{{ item.precio | currency }}</td>
-                  <td  class="text-xs-center">{{item.subtotal}}</td>
+                  <td >{{item.codigoproducto}}</td>
+                  <td  v-if="2==3" ></td>
+                 <td  >{{item.descripcion}}</td>
+                  <td >{{(item.cantidad )}}</td>
+                  <td  >{{ item.precio | currency }}</td>
+                  <td >{{item.subtotal}}</td>
                   
                 </template>
               
@@ -263,7 +264,7 @@
                 </template>
               </v-data-table>
                <v-flex class="text-xl">
-                <strong><h3>TOTAL:{{fromatodemoneda(vFacturacion.DetalleCabecera.total=calcularTotal) }}</h3></strong>
+                <strong><h3 style=" font-size: 18pt; text-align: right; color:white" c>TOTAL:{{fromatodemoneda(vFacturacion.DetalleCabecera.total=calcularTotal) }}</h3></strong>
               </v-flex>
         </v-col>
         <v-col cols="6" sm="6" md="2"  >
@@ -387,7 +388,7 @@
         <template v-slot:items>
           <td>{{ props.item.CodigoProducto }}</td>
           <td>{{ props.item.CodigoBarra }}</td>
-          <td>{{ props.item.Descripcion }}</td>
+          <td >{{ props.item.Descripcion }}</td>
           <td>{{props.item.PrecioVentaMinorista }}</td>
           <td>{{ props.item.StockActual }}</td>
           <td>{{ props.item.Marca}}</td>
@@ -477,32 +478,32 @@ export default {
     montoRules: [(v) => !!v || "Monto requerido"],
 
     cabeceraDetalles:[
-        { text: 'Borrar', value: 'borrar', sortable: false,class:"error"},
-        { text: 'Codigo Producto', value: 'codigoproducto', sortable: false,class:"error"},
+        { text: 'Borrar', value: 'borrar', sortable: false,class:"subtitle-1 text-uppercase green accent-5"},
+        { text: 'Codigo Producto', value: 'codigoproducto', sortable: false,class:"subtitle-1 text-uppercase green accent-5"},
         // { text: 'codigoimpuesto', value: 'codigoimpuesto', sortable: false, align: ' d-none'},
-        { text: 'Descripciones', value: 'descripcion', sortable: false,class:"error text-xl-center"},
-        { text: 'Cantidad', value: 'cantidad', sortable: false,class:"error" },
-        { text: 'Precio', value: 'precio', sortable: false,class:"error"},
-        { text: 'Sub-Total', value: 'subtotal', sortable: false,class:"error" },
+        { text: 'Descripciones', value: 'descripcion', sortable: false,class:"subtitle-1 text-uppercase green accent-5"},
+        { text: 'Cantidad', value: 'cantidad', sortable: false,class:"subtitle-1 text-uppercase green accent-5"},
+        { text: 'Precio', value: 'precio', sortable: false,class:"subtitle-1 text-uppercase green accent-5"},
+        { text: 'Sub-Total', value: 'subtotal', sortable: false,class:"subtitle-1 text-uppercase green accent-5" },
       ],
     cabeceraCliente: [
         { text: "Opcion", value: "opcion", sortable: true,class:"primary " },
         { text: "Codigo", value: "CodigoCliente", sortable: true, class:"primary" },
-        { text: "Razon Social", value: "RazonSocial", sortable: true ,class:"primary"},
-        { text: "Cedula", value: "Cedula", sortable: true,class:"primary" },
-        { text: "RUC", value: "Ruc", sortable: false,class:"primary" },
-        { text: "Dirección", value: "Direccion", sortable: false,class:"primary" },
-        { text: "Teléfono", value: "Telefono", sortable: false,class:"primary" },        
+        { text: "Razon Social", value: "RazonSocial", sortable: true ,class:"primary subtitle-1 text-uppercase"},
+        { text: "Cedula", value: "Cedula", sortable: true,class:"primary subtitle-1 text-uppercase" },
+        { text: "RUC", value: "Ruc", sortable: false,class:"primary subtitle-1 text-uppercase" },
+        { text: "Dirección", value: "Direccion", sortable: false,class:"primary subtitle-1 text-uppercase" },
+        { text: "Teléfono", value: "Telefono", sortable: false,class:"primary subtitle-1 text-uppercase" },        
       ],
     cabeceraProducto: [
-         { text: "Opciones", value: "opcion", sortable: false,class:"primary "  },
-        { text: "Codigo", value: "CodigoProducto", sortable: true,class:"primary "  },
-        { text: "C. de Barra", value: "CodigoBarra", sortable: false,class:"primary "  },
-        { text: "Descripcion", value: "Descripcion", sortable: false,class:"primary "  },
-        { text: "Precio Venta",value: "PrecioVentaMinorista",sortable: false,class:"primary "},
-        { text: "Stock Actual", value: "StockActual", sortable: false,class:"primary " },
-        { text: "Marca", value: "Marca", sortable: false,class:"primary "  },
-        { text: "Categoria", value: "Categoria", sortable: false,class:"primary "  },
+         { text: "Opciones", value: "opcion", sortable: false,class:"primary subtitle-1 text-uppercase "  },
+        { text: "Codigo", value: "CodigoProducto", sortable: true,class:"primary subtitle-1 text-uppercase "  },
+        { text: "C. de Barra", value: "CodigoBarra", sortable: false,class:"primary subtitle-1 text-uppercase "  },
+        { text: "Descripcion", value: "Descripcion", sortable: false,class:"primary subtitle-1 text-uppercase "  },
+        { text: "Precio Venta",value: "PrecioVentaMinorista",sortable: false,class:"primary subtitle-1 text-uppercase "},
+        { text: "Stock Actual", value: "StockActual", sortable: false,class:"primary subtitle-1 text-uppercase " },
+        { text: "Marca", value: "Marca", sortable: false,class:"primary subtitle-1 text-uppercase"  },
+        { text: "Categoria", value: "Categoria", sortable: false,class:"primary subtitle-1 text-uppercase "  },
         
       ],
     };
@@ -689,19 +690,25 @@ export default {
         //this.razonsocial =  this.vFacturacion.DetalleCabecera.datosDetalle[0].RazonSocial
        //  this.$store.state.vFacturacion.DetalleCabecera.datosDetalle[0].codigocliente
     },
+    encuentra(){
+      let sw=0;
+      for (var i=0;i<this.vFacturacion.DetalleCabecera.datosDetalle.length;i++){
+        if(this.vFacturacion.DetalleCabecera.datosDetalle[i].codigoproducto==this.vFacturacion.DetalleCabecera.codigoproducto){
+         sw=true;
+          this.vFacturacion.DetalleCabecera.datosDetalle.push(
+            { cantidad:1+this.vFacturacion.DetalleCabecera.cantidad })
+        }
+      }
+      console.log(sw)
+      return sw;
+    },
 
     agregarDatosTabla()
     {
-      let bandera=0
-      if(this.vFacturacion.DetalleCabecera.codigoproducto.length==0)
-      {
-        this.bandera=0
-      }else{
-        this.bandera=1
-      }
-      if(this.bandera==1)
-      {
-          if(this.vFacturacion.DetalleCabecera.cantidad.length==0)
+       if (this.encuentra()==true){
+              console.log('La recepcion ya ha sido agregada.');
+            } else{
+                  if(this.vFacturacion.DetalleCabecera.cantidad.length==0)
           {
         this.vFacturacion.DetalleCabecera.cantidad=1
         this.vFacturacion.DetalleCabecera.datosDetalle.push(
@@ -726,7 +733,9 @@ export default {
             })
         this.limpiarAgegarProductos()
       }
-      }
+      
+            }
+      
       
     },
      eliminarDetalle(arr,item){
@@ -801,6 +810,8 @@ export default {
   // nuevo codigo
 };
 </script>
-<style scoped>
-
+<style >
+#texto{
+ font-size: 40%;
+}
 </style>

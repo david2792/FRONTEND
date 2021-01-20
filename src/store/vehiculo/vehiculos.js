@@ -5,7 +5,7 @@ import axios from 'axios';
 export const state = {
     vehiculos: [],
     Vehiculo:{
-            codigo:"",
+        codigovehiculo:"",
             CodigoCliente:"",
             codigomarca: "",
             codigomodelo:  "",
